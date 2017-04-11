@@ -1,0 +1,51 @@
+{
+  "name": "RefArchConvBroker",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+		"type": "git",
+		"url": "https://github.com:jbcodeforce/refarch-cognitive-conversation-broker.git"
+	},
+	"engines": {
+		"node": "4.x"
+	},
+	"author": "Jerome Boyer",
+  "scripts": {
+    "ng": "ng",
+    "start": "node server/server",
+    "dev": "concurrently \"ng build\" \"nodemon server/server\" ",
+    "build": "ng build"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^2.4.0",
+    "@angular/compiler": "^2.4.0",
+    "@angular/core": "^2.4.0",
+    "@angular/forms": "^2.4.0",
+    "@angular/http": "^2.4.0",
+    "@angular/platform-browser": "^2.4.0",
+    "@angular/platform-browser-dynamic": "^2.4.0",
+    "@angular/router": "^3.4.0",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.7.6",
+    "cfenv": "^1.0.x",
+    	"body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+		"express": "^4.13.x",
+		"express-session": "1.13.0",
+    "extend": "^3.0.0",
+    "request": "^2.72.0",
+    "vcap_services": "^0.1.7",
+    "watson-developer-cloud": "^2.x",
+    "botkit": "^0.2.2"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.0.0-rc.1",
+    "@angular/compiler-cli": "^2.4.0",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "~6.0.60",
+    "concurrently": "^3.1.0",
+    "typescript": "~2.0.0"
+  }
+}
