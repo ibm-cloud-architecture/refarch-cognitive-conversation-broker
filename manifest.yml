@@ -1,10 +1,11 @@
 applications:
 - path: .
-  name: refarch-cognitive-conversation-broker
-  host: RefArchConvBroker
+  name: refarch-cogni-conversation-broker
+  host: refarchcogniconvbroker
   instances: 1
   domain: mybluemix.net
   memory: 256M
   disk_quota: 1024M
   services:
     - Conversation-ut
+    - refarch-cogni-conversation-broker-cloudantNoSQLDB
