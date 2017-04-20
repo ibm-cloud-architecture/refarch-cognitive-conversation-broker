@@ -14,11 +14,12 @@ export class ConversationComponent {
   context:any; // used to keep the Conversation context
   message:string;
   /**
-  When creating a conversation component call Watson to get a greetings as defined in the Dialog
+  When creating a conversation component call Watson to get a greetings message as defined in the Dialog. This is more user friendly.
   */
   constructor(private convService : ConversationService){
     this.callConversationBFF("Hello");
   }
+
   // variable used in the input field in html page
   queryString=""
 

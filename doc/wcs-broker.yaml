@@ -1,0 +1,22 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "convbroker"
+  title: "Watson conversation broker"
+  description: "This api aims to expose a simple REST verb to interact with Watson Conversation. The broker is an important element to front end Watson Conversation so data can be injected into the dialog or other components can be easily integrated to deliver an end-to-end chat bot solution."
+  version: "0.0.1"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/api"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /conversation:
+    post:
+      responses:
+        200:
+          description: "200 is success"
+      summary: Send the user\'s question/message to Watson Conversation. The message can include context variables.
