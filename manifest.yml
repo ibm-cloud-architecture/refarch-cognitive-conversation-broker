@@ -1,10 +1,3 @@
-declared-services:
-    - Conversation-ut
-      label: "conversation",
-      plan: "free"
-    - refarch-cogni-conversation-broker-cloudantNoSQLDB
-      label: "cloudantNoSQLDB"
-      plan: "lite"
 applications:
 - path: .
   name: refarch-cogni-conversation-broker
@@ -15,4 +8,4 @@ applications:
   disk_quota: 1024M
   services:
     - Conversation-ut
-    - refarch-cogni-conversation-broker-cloudantNoSQLDB
+    - refarch-wcs-conversation-broker-cloudantNoSQLDB

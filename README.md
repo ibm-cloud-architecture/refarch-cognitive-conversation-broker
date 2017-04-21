@@ -42,6 +42,7 @@ Rename the file as env.json
 The following api is exposed:
 POST refarch-wcs-broker.mybluemix.net/api/conversation
 The body should content a {text: message}
+
 # Code explanation  
 The project is split into two parts: the client side that is an Angular 2 single page application and the server which is an expressjs app.
 ![Component view](doc/angular2-nodejs.png)
@@ -188,7 +189,8 @@ The Context is used to keep conversation context between each interaction. The s
 
 The two other methods of this component are used to server user interaction.
 
-The conversation.service .ts defines the method to do the HTTP request.
+The conversation.service.ts defines the method to do the HTTP request to the backend for frontend server running in nodejs.
+
 ```
 submitMessage(msg:string,ctx:any): Observable<any>{
   let bodyString = JSON.stringify(  { text:msg,context:ctx });
@@ -206,16 +208,17 @@ npm install
 ```
 Execute locally
 ```
-npm run development
+npm run dev
 ```
 
 
 # Deploy to Bluemix
-To be able to deploy to bluemix, you need an account.
+To be able to deploy to bluemix, you need an account.  
+
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/jbcodeforce/refarch-cognitive-conversation-broker)
 
 
-# contribute
+# Contribute
 We welcome your contribution. There are multiple ways to contribute: report bugs and improvement suggestion, improve documentation and contribute code.
 We really value contributions and to maximize the impact of code contributions we request that any contributions follow these guidelines
 * Please ensure you follow the coding standard and code formatting used throughout the existing code base
