@@ -27,20 +27,25 @@ router.post('/conversation',function(req,res){
     if(!req.body){
       res.status(400).send({error:'no post body'});
     } else {
-      if (res.context !== undefined && res.context.url !== undefined) {
-        // url is an attribute of the context that can be set in the conversation to let the user
-        // navigates to a business application. So this test is part of the business logic.
-        res.context.url= undefined;
+      if (req.body.context !== undefined) {
+          if (req.body.context.action === "getVar") {
+            req.body.context[req.body.context.varname] = req.body.text;
+        }
       }
+      console.log(">>> "+JSON.stringify(req.body,null,2));
       conversation.submit(req.body,function(response) {
-        console.log(JSON.stringify(response,null,2));
+        console.log("<<< "+JSON.stringify(response,null,2));
         var rep="";
-        // TODO add logic to manage Conversation response
         if (response.context.url != undefined) {
-          rep={"text":response.output.text[0] + "<a class=\"btn btn-primary\" href=\""+response.context.url+"\">Here</a>","context":response.context}
+            if (response.context.action === "click") {
+                rep={"text":response.output.text[0] + "<a class=\"btn btn-primary\" href=\""+response.context.url+"\">Here</a>","context":response.context}
+            } else {
+               // TODO call the url automatically
+            }
         } else {
           rep={"text":response.output.text[0],"context":response.context}
         }
+        // TODO add logic to manage Conversation response
         res.status(200).send(rep);
         });
     }

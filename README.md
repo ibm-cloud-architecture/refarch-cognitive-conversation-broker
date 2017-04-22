@@ -1,4 +1,4 @@
-# refarch-cognitive-conversation-broker
+# Cognitive Architecture: Conversation Broker
 This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app  or even a business process defined in [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud). The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation front end.
 The project is designed as a micro service and deployable as a Cloud Foundry application. The concept of broker is presented in the IBM Cognitive Reference Architecture for Engagement as illustrated in the figure below:
 
@@ -6,13 +6,15 @@ The project is designed as a micro service and deployable as a Cloud Foundry app
 
 # Current Version
 This version is still under development, it supports the current features:
-* User interface done in Angular 2 to start the conversation with a hello message and support a simple input field to enter a question to Watson
-* The supported questions depend on the Intents defined in Watson Conversation
+* User interface done in Angular 2 to start the conversation with a hello message and to support a simple input field to enter a question to Watson
+* The supported questions depend on the Intents defined in Watson Conversation. A proposed workspace is available for a internal IT support solution.
 * Support the Backend for Front end pattern with a nodejs/ expressjs application.
+* Support the integration to BPM on cloud by triggering a business process via SOAP request.
 You may fork this project for your own purpose and develop by reusing the code. If you want to contribute please submit a pull request on this repository.
 
 # Prerequisites
 
+* You need your own github account
 * You need to have a Bluemix account, and know how to use cloud foundry command line interface to push the application
 * You need to have nodejs installed on your computer with the npm installer tool too.
 * Clone current repository, or if you want to work on the code, fork it and clone your forked repository
