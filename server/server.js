@@ -12,7 +12,7 @@ const app = express();
 // Get our API routes
 const api = require('./routes/api');
 
-// Parsers for POST data
+// Parsers for POST JSON PAYLOAD
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
