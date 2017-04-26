@@ -1,0 +1,12 @@
+deviceBrand,Apple,apple,,,,
+deviceBrand,Dell,dell,,,,
+deviceBrand,Lenovo,lenovo,,,,
+deviceBrand,Motorola,moto,motorola,nexus,,
+deviceBrand,Samsung,galaxy,notes,samsung,,
+deviceType,laptop,computer,workstation,,,
+deviceType,phone,android,iphone,cell phone,mobile,smartphone
+deviceType,tablet,ipad,kindle,galaxy,,
+yes-no,no,n,,,,
+yes-no,yes,y,,,,
+supplier,supplier,company,partner,,,
+password,password,,,,,

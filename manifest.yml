@@ -7,5 +7,4 @@ applications:
   memory: 256M
   disk_quota: 1024M
   services:
-    - Conversation-ut
-    - refarch-wcs-conversation-broker-cloudantNoSQLDB
+    - ITSupportConversation
