@@ -1,0 +1,48 @@
+Hello,Greetings
+Hi,Greetings
+How are you?,Greetings
+Bonjour,Greetings
+Howdy,Greetings
+What's up?,Greetings
+Good Morning!,Greetings
+Namaste,Greetings
+Ola,Greetings
+What is up,Greetings
+hey,Greetings
+bye,Goodbye
+bye-bye,Goodbye
+ciao,Goodbye
+have a good day,Goodbye
+take care,Goodbye
+see you later,Goodbye
+ttyl,Goodbye
+How can I reset my password?,ResetPassword
+"I could not login in this morning, is my password expired?",ResetPassword
+How can I change my password?,ResetPassword
+How can I reset the access password for the application AbC?,ResetPassword
+What are the different options to reset my password?,ResetPassword
+I want to reset my intranet password,ResetPassword
+I want to access to supplier due diligence business process,SupplierOnboarding
+I want to board new supplier,SupplierOnboarding
+On-boarding a new supplier,SupplierOnboarding
+Supplier due diligence,SupplierOnboarding
+What is the process to on-board a new supplier?,SupplierOnboarding
+What is the URL of the business process for on-boarding a supplier?,SupplierOnboarding
+I have a new supplier what is the procedure to access it,SupplierOnboarding
+bring my laptop,BYOD
+bring my phone,BYOD
+byod,BYOD
+bring my tablet,BYOD
+use my iphone for work,BYOD
+use my phone for business,BYOD
+use my own smartphone for work,BYOD
+use my ipad for business,BYOD
+I want to bring my own device,BYOD
+How to access product inventory?,ApplicationAccess
+How to access reimbursement process?,ApplicationAccess
+How to book a travel?,ApplicationAccess
+How to get access to business application AbC?,ApplicationAccess
+I want to access application,ApplicationAccess
+What is the status of the business application?,ApplicationAccess
+I want to access application AbC,ApplicationAccess
+I want to access Innovation Workshop,ApplicationAccess
