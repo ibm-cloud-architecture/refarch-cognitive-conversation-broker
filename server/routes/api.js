@@ -16,6 +16,7 @@
 const express = require('express');
 var conversation = require('./features/conversation');
 var slacklisterner = require('./features/slack-listener');
+var bpmoc = require('./features/supplier-bpm-client');
 const router = express.Router();
 
 /* GET api listing. */
@@ -39,11 +40,13 @@ router.post('/conversation',function(req,res){
         if (response.context.url != undefined) {
             if (response.context.action === "click") {
                 rep={"text":response.output.text[0] + "<a class=\"btn btn-primary\" href=\""+response.context.url+"\">Here</a>","context":response.context}
-            } else {
-               // TODO call the url automatically
             }
-        } else {
-          rep={"text":response.output.text[0],"context":response.context}
+        } else if (response.context.action === "trigger"
+               && response.context.actionName === "supplierOnBoardingProcess") {
+              bpmoc.callBPMSupplierProcess(response.context.customerName,response.context.productName);
+              rep={"text":response.output.text[0],"context":response.context}
+          } else {
+             rep={"text":response.output.text[0],"context":response.context}
         }
         // TODO add logic to manage Conversation response
         res.status(200).send(rep);

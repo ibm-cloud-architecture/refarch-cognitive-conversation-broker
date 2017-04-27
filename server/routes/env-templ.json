@@ -5,5 +5,10 @@
       "password":"",
       "workspaceId":"",
       "conversationId":""
+    },
+    "bpmoc" :{
+      "servername":"",
+      "processname":"",
+      "basicAuth":""
     }
 }

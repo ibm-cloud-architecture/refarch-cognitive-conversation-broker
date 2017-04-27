@@ -1,34 +1,36 @@
 # Cognitive Architecture: Conversation Broker
-This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app  or even a business process defined in [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud). The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation front end.
-The project is designed as a micro service and deployable as a Cloud Foundry application. The concept of broker is presented in the IBM Cognitive Reference Architecture for Engagement as illustrated in the figure below:
+This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app  or even a business process defined in [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud). The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation front end which itself uses the APIs.
+The project is designed as a micro service and deployable as a Cloud Foundry application on [IBM Bluemix](http://www.bluemix.net). The concept of broker is presented in the [IBM Cognitive Reference Architecture for Engagement](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain) as illustrated in the figure below:
 
 ![WCS Reference Architecture](doc/WCS-ra.png) with the 'Conversation Application' icon.
 
 ## Current Version
-This version is still under development, it supports the current features:
-* User interface done in Angular 2 to start the conversation with a hello message and to support a simple input field to enter a question to Watson
-* The supported questions depend on the Intents defined in Watson Conversation. A proposed workspace is available for a internal IT support solution.
-* Support the Backend for Front end pattern with a nodejs/ expressjs application.
-* Support the integration to BPM on cloud by triggering a business process via SOAP request.
-You may fork this project for your own purpose and develop by reusing the code. If you want to contribute please submit a pull request on this repository.
+This version is still under development, but is used for IBM internal [training](./doc/tutorial.md), so it is functional. It supports the current features:
+* User interface is done with [Angular 2](angular.io) and support a simple  input field to enter a question to Watson and get a chat type of user experience.
+* The supported questions depend on the Intents defined in Watson Conversation. A proposed Conversation workspace is available under the folder [wcs-workspace](./wcs-workspace) as a JSON file and represents a simple dialog for a IT support chat bot solution.
+* Support the Backend for Front end pattern with a nodejs/ expressjs application which exposes a HTTP POST /api/conversation end point.
+* Support the integration to BPM on cloud by triggering a business process via SOAP request by getting customer name and product name from the conversation.
+* Support persisting the conversation inside a document oriented database like [Cloudand DB on bluemix](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db)
+
+You may fork this project for your own purpose and develop on top of it. If you want to contribute please submit a pull request on this repository.
 
 ## Prerequisites
 
 * You need your own github account
-* You need to have a Bluemix account, and know how to use cloud foundry command line interface to push the application
-* You need to have nodejs installed on your computer with the npm installer tool too.
-* Clone current repository, or if you want to work on the code, fork it in your own github repository and the clone your forked repository on your local computer.
-* You need to install Angular 2 command line interface tool ``` sudo npm install -g angular-cli``` on Mac for example.
-
+* You need to have a Bluemix account, and know how to use cloud foundry command line interface to push the application to Bluemix.
+* You need to have [nodejs](https://nodejs.org/en/) installed on your computer with the [npm](https://www.npmjs.com/) installer tool too.
+* Clone current repository, or if you want to work on the code, fork it in your own github repository and then clone your forked repository on your local computer.
 
 ```
 git clone https://github.com/jbcodeforce/refarch-cognitive-conversation-broker
 cd refarch-cognitive-conversation-broker
 npm install
 ```
+* You need to install Angular 2 command line interface [cli.angular.io](http://cli.angular.io) tool ``` sudo  npm install -g @angular/cli``` on Mac for example.
+* You need to install [nodemon](https://nodemon.io/) with ``` sudo npm install -g nodemo```
 
 ## Link to your Conversation service
-You need to create a Watson Conversation Service in bluemix, get the credential and update the file env-templ.json under server/routes folder with your own credential
+You need to create a Watson Conversation Service in IBM Bluemix, get the credential and update the file env-templ.json under server/routes folder with your own credential, then rename this file as env.json
 ```
 {
     "conversation" :{
@@ -43,8 +45,8 @@ You need to create a Watson Conversation Service in bluemix, get the credential 
 Rename the file as env.json
 
 ## Exposed REST APIs
-The following api is exposed:
-POST refarch-wcs-broker.mybluemix.net/api/conversation
+The following api is exposed so far:
+POST <>/api/conversation
 The body should content at least the {text: message}.
 
 # Code explanation  
@@ -112,7 +114,7 @@ The package.json file specifies the minimum dependencies for the server and clie
 
 The [api.js](./server/routes/api.js) defines the URL to be used by angular 2 AJAX calls. Most of the user interactions on the Browser are supported by Angular 2, with its Router mechanism and the DOM rendering capabilities via directives and components. When there is a need to send data to the server for persistence or calling one of the Cognitive Service, an AJAX calls is done and the server will respond asynchronously later.
 
-api.js uses the express middleware router to handle URL mapping.
+api.js uses the [express.js](http://https://expressjs.com) middleware router to handle URL mapping.
 
 ```
 const express = require('express');
@@ -305,6 +307,7 @@ To be able to deploy to bluemix, you need an account.
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/jbcodeforce/refarch-cognitive-conversation-broker)
 
+You can use the ```cf push <bluemix-app-name>```
 
 # Contribute
 We welcome your contribution. There are multiple ways to contribute: report bugs and improvement suggestion, improve documentation and contribute code.

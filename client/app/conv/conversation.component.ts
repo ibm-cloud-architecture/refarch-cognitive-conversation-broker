@@ -17,15 +17,16 @@ export class ConversationComponent {
   When creating a conversation component call Watson to get a greetings message as defined in the Dialog. This is more user friendly.
   */
   constructor(private convService : ConversationService){
-    this.callConversationBFF("Hello");
+    // Uncomment this line if you do not have a conversation_start trigger in a node of your dialog
+    // this.callConversationBFF("Hello");
   }
 
-  // variable used in the input field in html page
+  // variable used for the input field in html page to get user query
   queryString=""
 
   callConversationBFF(msg:string) {
     this.convService.submitMessage(msg,this.context).subscribe(
-      data => {console.log(data)
+      data => {
         this.context=data.context;
         let s:Sentence = new Sentence();
         s.direction="from-watson";
