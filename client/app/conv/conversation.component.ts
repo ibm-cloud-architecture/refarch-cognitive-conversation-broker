@@ -18,7 +18,7 @@ export class ConversationComponent {
   */
   constructor(private convService : ConversationService){
     // Uncomment this line if you do not have a conversation_start trigger in a node of your dialog
-    // this.callConversationBFF("Hello");
+    this.callConversationBFF("Hello");
   }
 
   // variable used for the input field in html page to get user query
