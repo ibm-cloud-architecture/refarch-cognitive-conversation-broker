@@ -18,11 +18,11 @@ You may fork this project for your own purpose and develop on top of it. If you 
 
 * You need your own github account
 * You need to have a Bluemix account, and know how to use cloud foundry command line interface to push the application to Bluemix.
-* You need to have [nodejs](https://nodejs.org/en/) installed on your computer with the [npm](https://www.npmjs.com/) installer tool too.
+* You need to have [nodejs](https://nodejs.org/en/) installed on your computer with the [npm](https://www.npmjs.com/) installer tool.
 * Clone current repository, or if you want to work on the code, fork it in your own github repository and then clone your forked repository on your local computer.
 
 ```
-git clone https://github.com/jbcodeforce/refarch-cognitive-conversation-broker
+git clone https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker
 cd refarch-cognitive-conversation-broker
 npm install
 ```

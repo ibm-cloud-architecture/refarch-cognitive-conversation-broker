@@ -13,13 +13,13 @@
   "scripts": {
     "ng": "ng",
     "start": "node server/server",
-    "dev": "concurrently \"ng build\" \"nodemon server/server\" ",
+    "dev": "concurrently \"ng build\" \"nodemon server/server\"",
     "build": "ng build"
   },
   "private": true,
   "dependencies": {
     "@angular/common": "^2.4.0",
-    "@angular/compiler": "^2.4.0",
+    "@angular/compiler": "latest",
     "@angular/core": "^2.4.0",
     "@angular/forms": "^2.4.0",
     "@angular/http": "^2.4.0",
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@angular/cli": "latest",
+    "@angular/compiler-cli":"latest",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "concurrently": "^3.1.0",
