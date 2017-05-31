@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { AppComponent }         from './app.component';
 import { ConversationComponent} from './conv/conversation.component';
 import { ConversationService }  from './conv/conversation.service';
-import { HomeComponent }               from './home.component';
+import { HomeComponent }        from './home.component';
 
 
 const routes: Routes = [

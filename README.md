@@ -1,5 +1,9 @@
 # Cognitive Architecture: Conversation Broker
-This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app  or even a business process defined in [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud). The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation front end which itself uses the APIs.
+This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app  or even a business process defined in [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud).
+
+This project is part of the 'IBM Cognitive Reference Architecture' suite, available at https://github.com/ibm-cloud-architecture/refarch-cognitive.
+
+The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation front end which itself uses the APIs.
 The project is designed as a micro service and deployable as a Cloud Foundry application on [IBM Bluemix](http://www.bluemix.net). The concept of broker is presented in the [IBM Cognitive Reference Architecture for Engagement](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain) as illustrated in the figure below:
 
 ![WCS Reference Architecture](doc/WCS-ra.png) with the 'Conversation Application' icon.
@@ -45,9 +49,17 @@ You need to create a Watson Conversation Service in IBM Bluemix, get the credent
 Rename the file as env.json
 
 ## Exposed REST APIs
-The following api is exposed so far:
-POST <>/api/conversation
-The body should content at least the {text: message}.
+The exposed aPI is:
+ ```
+title: conversation-broker
+case:
+  - operations:
+      - verb: post
+        path: /api/conversation
+        data: {context:{}, text: "a question"}
+ ```
+
+The body should content at least the {text: message}. The context object is optional, it will be added with the Watson Conversation ID reference.
 
 # Code explanation  
 The project is split into two parts: the client side that is an Angular 2 single page application and the server which is an expressjs app.
@@ -301,6 +313,8 @@ Execute locally
 $ npm run dev
 ```
 
+# tutorial
+A detailed [tutorial](doc/tutorial.md) help you to rebuild this micro service from the beginning.  
 
 # Deploy to Bluemix
 To be able to deploy to bluemix, you need an account.  

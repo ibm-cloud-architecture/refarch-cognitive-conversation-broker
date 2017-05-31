@@ -22,7 +22,7 @@ const path = require('path');
 const cfenv = require('cfenv');
 const bodyParser = require('body-parser');
 
-const Debug=true;
+
 
 const app = express();
 
@@ -53,13 +53,5 @@ const port =appEnv.port || '3000';
 
 // start server on the specified port and binding host
 app.listen(port, '0.0.0.0', function() {
-  // print a message when the server starts listening
-  if (Debug) {
-      var config = require('./routes/env.json');
-      var extend = require('extend');
-      var vcapServices = require('vcap_services');
-      var wcconfig = extend(config.conversation, vcapServices.getCredentials('conversation'));
-      console.log("--- Connect to Watson Conversation named: " + wcconfig.conversationId);
-  }
-  console.log("Server v0.0.1 starting on " + appEnv.url);
+  console.log("Conversation Broker Service v0.0.2 starting on " + appEnv.url);
 });

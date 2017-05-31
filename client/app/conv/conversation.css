@@ -1,9 +1,10 @@
 .conversation-container {
-  border-style: none;
-  border-width: 1px;
-  border-radius: 5px;
+  border-style: solid;
   max-width: 700px;
   margin: 30px auto;
+  border-width : 2px;
+  border-radius: 8px;
+  border-color: #blue;
 }
 
 .scrolling-box {

@@ -15,9 +15,11 @@
  */
 const express = require('express');
 var conversation = require('./features/conversation');
-var slacklisterner = require('./features/slack-listener');
+//var slacklisterner = require('./features/slack-listener');
 var bpmoc = require('./features/supplier-bpm-client');
+const persist = require('./features/persist.js');
 const router = express.Router();
+const debug=true;
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -33,23 +35,30 @@ router.post('/conversation',function(req,res){
             req.body.context[req.body.context.varname] = req.body.text;
         }
       }
-      console.log(">>> "+JSON.stringify(req.body,null,2));
+      if (debug) {console.log(">>> "+JSON.stringify(req.body,null,2));}
       conversation.submit(req.body,function(response) {
-        console.log("<<< "+JSON.stringify(response,null,2));
-        var rep="";
-        if (response.context.url != undefined) {
-            if (response.context.action === "click") {
-                rep={"text":response.output.text[0] + "<a class=\"btn btn-primary\" href=\""+response.context.url+"\">Here</a>","context":response.context}
+          if (debug) {console.log(" <<< "+JSON.stringify(response,null,2));}
+          //  var rep={"text":response.output.text[0],"context":response.context};
+          var rep=response;
+          rep.text=response.output.text[0];
+          rep.context.persistId=req.body.context.persistId;
+          rep.context.revId=req.body.context.revId;
+          // Here apply orchestration logic
+          if (rep.context.url != undefined) {
+            if (rep.context.action === "click") {
+                rep.text=rep.output.text[0] + "<a class=\"btn btn-primary\" href=\""+rep.context.url+"\">Here</a>"
             }
-        } else if (response.context.action === "trigger"
-               && response.context.actionName === "supplierOnBoardingProcess") {
-              bpmoc.callBPMSupplierProcess(response.context.customerName,response.context.productName);
-              rep={"text":response.output.text[0],"context":response.context}
-          } else {
-             rep={"text":response.output.text[0],"context":response.context}
-        }
-        // TODO add logic to manage Conversation response
-        res.status(200).send(rep);
+          } else if (rep.context.action === "trigger"
+               && rep.context.actionName === "supplierOnBoardingProcess") {
+              bpmoc.callBPMSupplierProcess(rep.context.customerName,rep.context.productName);
+          }
+          console.log("Before save: "+JSON.stringify(rep,null,2))
+          persist.saveConversation(rep,function(persistRep){
+                rep.context.persistId=persistRep.id;
+                rep.context.revId=persistRep.rev;
+                console.log("Send back: "+JSON.stringify(rep,null,2));
+                res.status(200).send(rep); // be sure to send a response with persistence id
+          });
         });
     }
 });

@@ -19,7 +19,6 @@
   "private": true,
   "dependencies": {
     "@angular/common": "^2.4.0",
-    "@angular/compiler": "latest",
     "@angular/core": "^2.4.0",
     "@angular/forms": "^2.4.0",
     "@angular/http": "^2.4.0",
@@ -30,7 +29,7 @@
     "rxjs": "^5.1.0",
     "zone.js": "^0.7.6",
     "cfenv": "^1.0.x",
-    "cloudant": "1.4.x",
+    "cloudant": "^1.4.x",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.x",
@@ -43,7 +42,8 @@
   },
   "devDependencies": {
     "@angular/cli": "latest",
-    "@angular/compiler-cli":"latest",
+    "@angular/compiler": "^2.4.10",
+    "@angular/compiler-cli": "^2.4.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "concurrently": "^3.1.0",

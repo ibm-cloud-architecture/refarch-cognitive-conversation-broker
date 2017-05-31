@@ -18,11 +18,16 @@ var watson = require('watson-developer-cloud');
 var vcapServices = require('vcap_services');
 var extend = require('extend');
 
+const debug=true;
+// print a message when the server starts listening
+if (debug) {
+    var wcconfig = extend(config.conversation, vcapServices.getCredentials('conversation'));
+    console.log("--- Connect to Watson Conversation named: " + wcconfig.conversationId);
+}
 /**
 Submit the user's response or first query to Watson Conversation.
 */
 exports.submit = function(message,next) {
-      console.log(message);
       var wcconfig = extend(config.conversation, vcapServices.getCredentials('conversation'));
       var conversation = watson.conversation({
         username: wcconfig.username,
