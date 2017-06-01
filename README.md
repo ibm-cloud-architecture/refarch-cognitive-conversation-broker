@@ -213,7 +213,7 @@ Under the client folder the first important file to consider is the index.html t
 The main.ts script is a standard angular 2 typescript file to load the main module.
 
 The *app-root* tag is defined in the app/app.components.ts. This file uses a base html, used as template for header, body and footer parts. The body part will be injected using the Angular 2 routing mechanism.
-```
+```html
   <router-outlet></router-outlet>
 ```
 Most of the user interactions on the Browser are supported by Angular 2, with its Router mechanism and the DOM rendering capabilities via directives and components. When there is a need to send data to the server for persistence or calling one of the Cognitive Service, an AJAX calls is done and the server will respond asynchronously later.
@@ -221,7 +221,7 @@ Most of the user interactions on the Browser are supported by Angular 2, with it
 The application uses a unique route, as of now, but the approach should help you to add more elements as user interface components.
 
 The application routing is defined in the app.module.ts as
-```
+```javascript
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'conversation', component: ConversationComponent },
@@ -264,9 +264,9 @@ export class ConversationComponent {
   this.callConversationBFF("Hello");
 }
 ```
-![Conversation Start](doc/readme/wcs-conv-greeting.png)
+![Conversation Start](doc/tutorial/wcs-conv-greeting.png)
 The internal function below uses the conversation service to send the user input, and wait to get Watson response.
-```
+```javascript
 callConversationBFF(msg:string) {
   this.convService.submitMessage(msg,this.context).subscribe(
     data => {console.log(data)
