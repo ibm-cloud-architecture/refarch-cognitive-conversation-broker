@@ -143,7 +143,7 @@ So the last piece is the Watson Conversation Broker under routes/features/conver
 
 This code is straight forward, it loads configuration from the env.json file or the VCAP service if the application is deployed to Bluemix, then it uses the Watson cloud developer javascript APIs to send the user message.
 
-```
+```javascript
 exports.submit = function(message,next) {
       console.log(message);
       var wcconfig = extend(config.conversation, vcapServices.getCredentials('conversation'));
