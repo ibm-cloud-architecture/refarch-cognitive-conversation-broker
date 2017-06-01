@@ -62,16 +62,16 @@ case:
 The body should content at least the {text: message}. The context object is optional, it will be added with the Watson Conversation ID reference.
 
 # Code explanation  
-The project is split into two parts: the client side that is an Angular 2 single page application and the server which is an expressjs app.
+The project is split into two parts: the client side that is an Angular 2 single page application (code under client folder) and the server which is an expressjs app.
 ![Component view](doc/angular2-comps.png)
 
 ## Server side
 The code is under the server folder. The server.js is the main javascript started when the *npm start* command is executed.
-The server uses expressjs, serves a index.html page for the angular2 front end, and delegates to another javascript the call to url /api/*
-Express is a routing and middleware web framework; an app is a series of middleware function calls. [See expressjs.org](http://expressjs.com/en/guide/using-middleware.html) for more details.
+The server uses expressjs, serves a index.html page for the angular2 front end, and delegates to another javascript module any HTTP calls to url starting by **/api/***.  
+Express is a routing and middleware web framework used to simplify web server implementation in nodejs. An app is a series of middleware function calls. [See expressjs.com](http://expressjs.com/en/guide/using-middleware.html) for more details.
 The cfenv is used to deploy the application in Bluemix as a cloud foundry application.
 
-```
+```javascript
 const express = require('express');
 const app = express();
 
@@ -93,9 +93,9 @@ const port =appEnv.port || '3000';
 
 ...
 ```
-When a user enters the hostname url without any web context, the index.html page will be presented. Any URL with the pattern http://hostname/api will be supported by api.js script
+When a user enters the hostname url without any web context, the index.html page will be presented. Any URL with the pattern http://hostname/api will be supported by api.js script.
 
-*dist* is a folder for scripts built with @angular/cli ng build command.
+*dist* is a folder for scripts built with @angular/cli **ng build** command, so it contains the user interface javascripts generated code.
 
 This code needs to be improved with authentication and authorization controls.
 
@@ -128,7 +128,7 @@ The [api.js](./server/routes/api.js) defines the URL to be used by angular 2 AJA
 
 api.js uses the [express.js](http://https://expressjs.com) middleware router to handle URL mapping.
 
-```
+```javascript
 const express = require('express');
 const router = express.Router();
 const router = express.Router();
@@ -136,6 +136,7 @@ const router = express.Router();
 router.post('/conversation',function(req,res){
   ...
 ```
+
 On the HTTP POST to /api/conversation the text is in the request body, and can be sent to Watson conversation.
 
 So the last piece is the Watson Conversation Broker under routes/features/conversation.js
@@ -236,7 +237,7 @@ So the last important component is app/conv/conversation which defines a simple 
 
 The presented *div* part lists the text from an array of existing sentences, as we want to present the complete conversation. The syntax is using Angular 2 for loop to get each element of the array currentDialog and then add the text of this object in a div.
 
-```
+```html
 <div *ngFor="let p of currentDialog">
    <div class="message-box">
      <div class="{{p.direction}}">
@@ -253,7 +254,7 @@ The presented *div* part lists the text from an array of existing sentences, as 
 ```
 
 The conversation component uses the constructor to do a first call to Watson Conversation so the greetings intent is processed and Watson will start the dialog. If we do not use this technic, the user has to start the conversation, and most likely the greeting will not happen as a user will not start by a "hello" query.
-```
+```javascript
 export class ConversationComponent {
   currentDialog : Sentence[]=[];
   context:any; // used to keep the Conversation context
@@ -317,7 +318,7 @@ $ npm run dev
 A detailed [tutorial](doc/tutorial.md) help you to rebuild this micro service from the beginning.  
 
 # Deploy to Bluemix
-To be able to deploy to bluemix, you need an account.  
+To be able to deploy to bluemix, you need a bluemix account and the command line interface.  
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/jbcodeforce/refarch-cognitive-conversation-broker)
 

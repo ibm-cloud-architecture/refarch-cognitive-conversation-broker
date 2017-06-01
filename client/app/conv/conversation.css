@@ -10,7 +10,7 @@
 .scrolling-box {
   padding: 0px 5px;
   height: calc(100vh - 200px);
-  max-height: 700px;
+  max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
 }
