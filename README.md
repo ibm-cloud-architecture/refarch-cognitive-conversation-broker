@@ -6,7 +6,7 @@ This project is part of the 'IBM Cognitive Reference Architecture' suite, availa
 The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation front end which itself uses the APIs.
 The project is designed as a micro service and deployable as a Cloud Foundry application on [IBM Bluemix](http://www.bluemix.net). The concept of broker is presented in the [IBM Cognitive Reference Architecture for Engagement](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain) as illustrated in the figure below:
 
-![WCS Reference Architecture](doc/WCS-ra.png) with the 'Conversation Application' icon.
+![WCS Reference Architecture](doc/readme/WCS-ra.png) with the 'Conversation Application' icon.
 
 ## Current Version
 This version is still under development, but is used for IBM internal [training](./doc/tutorial.md), so it is functional. It supports the current features:
@@ -63,7 +63,7 @@ The body should content at least the {text: message}. The context object is opti
 
 # Code explanation  
 The project is split into two parts: the client side that is an Angular 2 single page application (code under client folder) and the server which is an expressjs app.
-![Component view](doc/angular2-comps.png)
+![Component view](doc/readme/angular2-comps.png)
 
 ## Server side
 The code is under the server folder. The server.js is the main javascript started when the *npm start* command is executed.
@@ -200,7 +200,7 @@ Under the client folder the first important file to consider is the index.html t
 * loading the angular *app-root* directive
 * As we will use client side url routing the base href="/" is added to the header to give angular url base context.
 
-```
+```html
 <head>
     <base href="/">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -264,7 +264,7 @@ export class ConversationComponent {
   this.callConversationBFF("Hello");
 }
 ```
-![Conversation Start](doc/wcs-conv-greeting.png)
+![Conversation Start](doc/readme/wcs-conv-greeting.png)
 The internal function below uses the conversation service to send the user input, and wait to get Watson response.
 ```
 callConversationBFF(msg:string) {
@@ -290,7 +290,7 @@ The two other methods of this component are used to serve user interactions.
 
 The conversation.service.ts defines the method to do the HTTP request to the backend for frontend server running in nodejs.
 
-```
+```javascript
 submitMessage(msg:string,ctx:any): Observable<any>{
   let bodyString = JSON.stringify(  { text:msg,context:ctx });
   let headers = new Headers({ 'Content-Type': 'application/json' });
