@@ -34,13 +34,13 @@ The following tasks have to be done for a project involving Watson Conversation:
 ## Design Thinking
 When implementing a cognitive solution, we may want to apply the Design Thinking methodology as it helps transforming a business improvement idea to concrete business application end users will use. The principles of empathy with users, prototyping or Minimum Viable Product and tolerance for failure are applied as part of the method.
 The storyboarding is one of such Design Thinking practice, where personas’ challenges and pains are addressed via stories. When engaging with a project team the first main exercise is to gather the requirement around Cognitive system and the use of the potential new application. Empathy maps are developed.  First we need to gather is the list of Personas as presented in screen shot below:  
-![persona](itsupport-persona.png)
+![persona](tutorial/itsupport-persona.png)
 then we need to develop with the project team and end users the empathy map to address pains and challenge but more data points so we can be more in empathy with the user of the application. The following diagram is a map for the internal user persona developed using [Mural](https://app.mural.ly).  
-![empathy map](empathy-map.png)
+![empathy map](tutorial/empathy-map.png)
 
 Another artifact to build, as soon as possible, and then enhance over time, is a System Context Diagram which helps assessing what are the systems to interact with.
 
-![system context view](syst-ctx.png)
+![system context view](tutorial/syst-ctx.png)
 
 The system context serves also to organize the work into teams, micro services development and crowd sourcing work for the Natural Language training tasks.
 
