@@ -33,7 +33,7 @@ npm install
 * You need to install Angular 2 command line interface [cli.angular.io](http://cli.angular.io) tool ``` sudo  npm install -g @angular/cli``` on Mac for example.
 * You need to install [nodemon](https://nodemon.io/) with ``` sudo npm install -g nodemo```
 
-## Link to your Conversation service
+## Link to your Watson Conversation service
 You need to create a Watson Conversation Service in IBM Bluemix, get the credential and update the file env-templ.json under server/routes folder with your own credential, then rename this file as env.json
 ```
 {
@@ -314,8 +314,8 @@ Execute locally
 $ npm run dev
 ```
 
-# tutorial
-A detailed [tutorial](doc/tutorial.md) help you to rebuild this micro service from the beginning.  
+# Tutorial
+A detailed [tutorial](doc/tutorial.md) should help you build the Watson Conversation artifacts. The following [article](doc/persistence.md) addresses how to persist the conversation in Cloud based document database like Cloudant or on-premise database.
 
 # Deploy to Bluemix
 To be able to deploy to bluemix, you need a bluemix account and the command line interface.  
@@ -325,15 +325,4 @@ To be able to deploy to bluemix, you need a bluemix account and the command line
 You can use the ```cf push <bluemix-app-name>```
 
 # Contribute
-We welcome your contribution. There are multiple ways to contribute: report bugs and improvement suggestion, improve documentation and contribute code.
-We really value contributions and to maximize the impact of code contributions we request that any contributions follow these guidelines
-* Please ensure you follow the coding standard and code formatting used throughout the existing code base
-* All new features must be accompanied by associated tests
-* Make sure all tests pass locally before submitting a pull request
-* New pull requests should be created against the integration branch of the repository. This ensures new code is included in full stack integration tests before being merged into the master branch.
-* One feature / bug fix / documentation update per pull request
-* Include tests with every feature enhancement, improve tests with every bug fix
-* One commit per pull request (squash your commits)
-* Always pull the latest changes from upstream and rebase before creating pull request.
-
-If you want to contribute, start by using git fork on this repository and then clone your own repository to your local workstation for development purpose. Add the up-stream repository to keep synchronized with the master.
+See the process in [main cognitive repository](https://github.com/ibm-cloud-architecture/refarch-cognitive).
