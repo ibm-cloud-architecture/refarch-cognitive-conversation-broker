@@ -264,7 +264,8 @@ export class ConversationComponent {
   this.callConversationBFF("Hello");
 }
 ```
-![Conversation Start](doc/tutorial/wcs-conv-greeting.png)
+![Conversation Start](doc/tutorial/wcs-conv-greeting.png)  
+
 The internal function below uses the conversation service to send the user input, and wait to get Watson response.
 ```javascript
 callConversationBFF(msg:string) {

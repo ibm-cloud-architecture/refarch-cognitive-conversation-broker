@@ -1,6 +1,6 @@
-# Conversation tutorial
+# Watson Conversation Hands-on Tutorial
 
-In this tutorial you will implement a simple help-me conversation in the context of Case Inc, which  is a medium size retail company, where employees access a set of intranet business applications. The support director wants to modernize the way to support internal staff and offload his team from basic work. Currently 20000 tickets are issued in a year. 50% of the calls are answered in 7 minutes whereas there are many situations that reach up to 70 minutes for resolution. 92% of the calls are resolved by level 1 support. Employees of the Case Inc engage with customer support mostly through phones. Today, call center agents struggle to find some of the answers in a timely fashion as the systems are not integrated. This results in loss of productivity and frustration on the part of the bank employees. Level 1 support team get frustrated at times because of unavailability of the right information and proper guidance. The Level 1 support has to consult the Level 2 support team members to get some answers.   
+In this tutorial you will implement a simple 'IT Support help-me' conversation in the context of Case Inc, which  is a medium size retail company, where employees access a set of intranet business applications. The support director wants to modernize the way to support internal staff and offload his team from basic work. Currently 20000 tickets are issued in a year. 50% of the calls are answered in 7 minutes whereas there are many situations that reach up to 70 minutes for resolution. 92% of the calls are resolved by level 1 support. Employees of the Case Inc engage with customer support mostly through phones. Today, call center agents struggle to find some of the answers in a timely fashion as the systems are not integrated. This results in loss of productivity and frustration on the part of the bank employees. Level 1 support team get frustrated at times because of unavailability of the right information and proper guidance. The Level 1 support has to consult the Level 2 support team members to get some answers.   
 
 As presented in the [Watson Conversation reference architecture diagram](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture) this tutorial addresses the Ground Truth development (3), the conversation flow design and the run time processing (4) from a business application simple interface (9).
 
@@ -48,11 +48,11 @@ The end user interacts with a WebApp developed with nodejs deployed as Cloud Fou
 
 The dialog is stateless, meaning that it does not retain information from one interchange to the next. Your application is responsible for maintaining any continuing information. However, the application can pass information to the dialog, and the dialog can update the context information and pass it back to the application. So each conversation solution needs to include this service orchestration to control data gathering and dialog context.
 
-# Hands on lab
+# Hands on lab - Step by step
 So now let start doing your own conversation!. Using your bluemix account, add a Watson Conversation Service. Select Catalog > Services > Watson.
-![Bluemix Watson Services](bmx-watson-serv.png)
+![Bluemix Watson Services](tutorial/bmx-watson-serv.png)
 Once created you can launch the conversation tool to develop the conversation artifacts.
-![Converation Service](bmx-conv-tool.png)
+![Conversation Service](tutorial/bmx-conv-tool.png)
 
 ## Creating a workspace
 The workspaces enable you to maintain separate intents, user examples, entities, and dialogs for each use or application. The conversation service uses a step by step, wizard like, approach to guide the developer to create workspace, intents, etc..  
@@ -85,20 +85,21 @@ So let add those intents in the workspace: the following diagram illustrates how
 For each intent we need to add the examples to train the conversation for intent recognition:
 ![Questions](tutorial/wcs-intent-question.png)
 As there are a lot of intents that can be reused from conversation to other conversation it is possible to define csv files to import intents. The format is presented in following example, one intent in each line  
-![greetings](greetings.png)
+![greetings](tutorial/greetings.png)
 
 import the tutorial/wcs-workspace/ITSupport-Intents.csv file to get the IT support demonstration intents.
 
 ## Unit testing
 As soon as you have created intent you can test it, using the ‘Ask Watson’ button on the top right corner of the conversation editor.
 Enter one of the example, you should get the #greeting intent identified by Watson. You can even try new sentence and you may have Watson inferring the good intent.  
-![try it](tryitout.png)
+![try it](tutorial/tryitout.png)
 
 ## Adding entities
 An entity is a portion of the user's input that you can use to provide a different response to a particular intent. Adding values and synonyms to entities helps your bot learn and understand important details that your users mention.
 Each entity definition includes a set of specific entity values that can be used to trigger different responses. Each value can have multiple synonyms, which define different ways that the same value might be specified in user input.
 
-Create entities to represent what the application the user wants to access.
+Create entities to represent what the application the user wants to access.  
+
 ![entities](tutorial/wcs-entities.png)
 
 ## Building the dialog
@@ -110,7 +111,8 @@ The first node you will add is to support how to handle the #greetings intent, s
 ![Greeting Node](tutorial/wcs-diag-greeting.png)  
 The above diagram also illustrates the multiple responses pattern to avoid to be repetitive, the bot can present different answers to the same query. It is possible to let the system picks up randomly an answer from the list of potential responses.
 
-Use the try it out feature (right top corner icon) to unit test your dialog:
+Use the try it out feature (right top corner icon) to unit test your dialog:  
+
 ![Dialog-ut](tutorial/wcs-diag-ut.png)
 
 At the beginning of each conversation, evaluation begins at the top level of dialog nodes.
@@ -176,9 +178,9 @@ The top level of dialog nodes should contain an anything_else node as the last
 
 ### Adding variable to context
 Suppose that we want to return an actionable URL, meaning the response includes a url variable and the content is presented to the user so he can click on it to navigate to a new service end point. To illustrate this we will present a URL of a business process deployed on BPM on Cloud. Therefore we are adding a new intent for Supplier on boarding named #supplieronboarding:
-![Supplier on boarding](supplier-intent.png)  
+![Supplier on boarding](tutorial/supplier-intent.png)  
 a new node is added to the dialog, but instead of defining a static text response, we use the {...} icon to access the Advanced editor so we can edit a json response object:
-![Supplier node](supplier-node.png)
+![Supplier node](tutorial/supplier-node.png)
 
 The object includes an output with the text to present and a context with a new variable named url to get the BPM on cloud access and an action variable to control the behavior of the broker code. When the user enters a question like: “I want to access the supplier on boarding business process” the returned object looks like:
 ```
@@ -236,7 +238,7 @@ if (rep.context.url != undefined) {
   }
 }
 ```
-![](click-url.png)  
+![](tutorial/click-url.png)  
 
 A lot can be done on the context object. For example, the application code could add elements in the context before calling conversation, then at the condition level in a node, test can be done on those elements. To use a context variable in your condition, use the format $variable_name:value or $variable_name == 'value'. The value of the condition might have been set by the application, or in the response portion of a previous dialog node. In the test below the context variable canAccessSOD is a Boolean set by accessing some internal authorization service that, for example, return true if a given userid can access an application.  
 ![](tutorial/wcs-diag-bool.png)  
