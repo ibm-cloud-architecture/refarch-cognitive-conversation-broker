@@ -12,9 +12,6 @@
       "basicAuth":""
     },
     "dbCredentials" : {
-            "username": "",
-            "password": "",
-            "host": "...-bluemix.cloudant.com",
             "url": "https://...-bluemix:...-bluemix.cloudant.com"
         }
 }

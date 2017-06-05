@@ -28,7 +28,6 @@ module.exports=  {
       if (conv.context.revId !== undefined) {
         conv._id=conv.context.persistId;
         conv._rev=conv.context.revId;
-
       }
     }
     db.insert(conv, function(err, data) {

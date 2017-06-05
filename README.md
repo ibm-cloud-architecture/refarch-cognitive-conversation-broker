@@ -1,10 +1,12 @@
 # Cognitive Architecture: Conversation Broker
-This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app  or even a business process defined in [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud).
+This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app  or even a business process defined in [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud). It is implemented as a micro service, using resiliency and light weight implementation, packaging and deployment model. The Implementation addresses multiple facets:
+* The broker code to facade Watson Conversation and support service orchestration
+* The Watson Conversation content in a form of a [workspace](wcs-workspace/workspace.json) to support 'IT Support' help: this is a common pattern of using a chat bot to address a lot of standard queries end users may have about IT applications or hardware.
+* A complete set of aspects to support production deployment.
 
 This project is part of the 'IBM Cognitive Reference Architecture' suite, available at https://github.com/ibm-cloud-architecture/refarch-cognitive.
 
-The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation front end which itself uses the APIs.
-The project is designed as a micro service and deployable as a Cloud Foundry application on [IBM Bluemix](http://www.bluemix.net). The concept of broker is presented in the [IBM Cognitive Reference Architecture for Engagement](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain) as illustrated in the figure below:
+The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation front end which itself uses the APIs, and a back end for front also responsible to do simple orchestration. The project is designed as a micro service and deployable as a Cloud Foundry application on [IBM Bluemix](http://www.bluemix.net). The concept of broker is presented in the [IBM Cognitive Reference Architecture for Engagement](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain) as illustrated in the figure below:
 
 ![WCS Reference Architecture](doc/readme/WCS-ra.png) with the 'Conversation Application' icon.
 
@@ -14,7 +16,7 @@ This version is still under development, but is used for IBM internal [training]
 * The supported questions depend on the Intents defined in Watson Conversation. A proposed Conversation workspace is available under the folder [wcs-workspace](./wcs-workspace) as a JSON file and represents a simple dialog for a IT support chat bot solution.
 * Support the Backend for Front end pattern with a nodejs/ expressjs application which exposes a HTTP POST /api/conversation end point.
 * Support the integration to BPM on cloud by triggering a business process via SOAP request by getting customer name and product name from the conversation.
-* Support persisting the conversation inside a document oriented database like [Cloudand DB on bluemix](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db)
+* Support persisting the conversation inside a document oriented database like [Cloudand DB on bluemix](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db). See detail [here](doc/persistence.md)
 
 You may fork this project for your own purpose and develop on top of it. If you want to contribute please submit a pull request on this repository.
 
