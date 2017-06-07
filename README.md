@@ -15,10 +15,18 @@ This version is still under development, but is used for IBM internal [training]
 * User interface is done with [Angular 2](angular.io) and support a simple  input field to enter a question to Watson and get a chat type of user experience.
 * The supported questions depend on the Intents defined in Watson Conversation. A proposed Conversation workspace is available under the folder [wcs-workspace](./wcs-workspace) as a JSON file and represents a simple dialog for a IT support chat bot solution.
 * Support the Backend for Front end pattern with a nodejs/ expressjs application which exposes a HTTP POST /api/conversation end point.
-* Support the integration to BPM on cloud by triggering a business process via SOAP request by getting customer name and product name from the conversation.
+* Support the integration to BPM on cloud by triggering a business process via SOAP request by getting customer name and product name from the conversation. See explanation [here](doc/integrate-bpm.md)
 * Support persisting the conversation inside a document oriented database like [Cloudand DB on bluemix](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db). See detail [here](doc/persistence.md)
 
 You may fork this project for your own purpose and develop on top of it. If you want to contribute please submit a pull request on this repository.
+
+
+## Expected skill set
+The content is for developer, technical sellers, and architect. As the code and how tos are based on nodejs, javascript and REST api, the following tutorial can be used:
+* npm for node and javascript installation: [What is npm](https://docs.npmjs.com/getting-started/what-is-npm)
+* nodejs
+* expressjs
+* angular 2
 
 ## Prerequisites
 
@@ -34,6 +42,8 @@ npm install
 ```
 * You need to install Angular 2 command line interface [cli.angular.io](http://cli.angular.io) tool ``` sudo  npm install -g @angular/cli``` on Mac for example.
 * You need to install [nodemon](https://nodemon.io/) with ``` sudo npm install -g nodemo```
+
+
 
 ## Link to your Watson Conversation service
 You need to create a Watson Conversation Service in IBM Bluemix, get the credential and update the file env-templ.json under server/routes folder with your own credential, then rename this file as env.json
