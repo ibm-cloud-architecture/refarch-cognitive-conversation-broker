@@ -47,7 +47,7 @@ npm install
 * You need to install [nodemon](https://nodemon.io/) with ``` sudo npm install -g nodemo```
 
 # Demonstration script
-If you want to see the conversation working go to the deployed app and run the following [demonstration script](demo/demoscript.md).
+If you want to see the conversation working go to the [deployed app](http://refarch-wcs-broker.mybluemix.net/) and run the following [demonstration script](demo/demoscript.md).
 
 # Code explanation  
 The project is split into two parts: the client side that is an Angular 2 single page application (code under client folder) and the server which is an expressjs app with code under folder:
