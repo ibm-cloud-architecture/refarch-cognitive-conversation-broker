@@ -27,6 +27,18 @@ if (config.debug) {
     console.log("--- Connect to Watson Conversation named: " + config.conversation.conversationId);
 }
 
+/**
+Submit the user's response or first query to Watson Conversation.
+*/
+exports.submitITSupport = function(message,next) {
+      sendMessage(message,config.conversation.workspace1,next);
+}
+
+exports.submitSODBHelp = function(message,next) {
+      sendMessage(message,config.conversation.workspace2,next);
+}
+
+
 var sendMessage = function(message,wkid,next){
   if (config.debug) {console.log(">>> "+JSON.stringify(message,null,2));}
   if (message.context.conversation_id === undefined) {
@@ -44,15 +56,4 @@ var sendMessage = function(message,wkid,next){
         }
 
     });
-}
-
-/**
-Submit the user's response or first query to Watson Conversation.
-*/
-exports.submitITSupport = function(message,next) {
-      sendMessage(message,config.conversation.workspace1,next);
-}
-
-exports.submitSODBHelp = function(message,next) {
-      sendMessage(message,config.conversation.workspace2,next);
 }

@@ -22,8 +22,6 @@ const path = require('path');
 const cfenv = require('cfenv');
 const bodyParser = require('body-parser');
 
-
-
 const app = express();
 
 // Get our API routes
