@@ -12,7 +12,7 @@ import { HomeComponent }        from './home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'conversation', component: ConversationComponent },
+  { path: 'conversation/:type', component: ConversationComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ]

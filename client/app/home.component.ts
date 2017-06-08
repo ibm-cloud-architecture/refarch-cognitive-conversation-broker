@@ -16,8 +16,8 @@ Main page component to display access to the different demo features.
 
 
     conversation(){
-      this.router.navigate(['conversation']);
+      this.router.navigate(['conversation/base']);
     }
     // ADD Here methods to be called from HTLM button to route to other component
-  
+
   }

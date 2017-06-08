@@ -3,8 +3,10 @@
       "version":"2017-02-03",
       "username":"",
       "password":"",
-      "workspaceId":"",
-      "conversationId":""
+      "workspace1":"",
+      "workspace2":"",
+      "conversationId":"",
+      "usePersistence": true
     },
     "bpmoc" :{
       "servername":"",
@@ -13,5 +15,6 @@
     },
     "dbCredentials" : {
             "url": "https://...-bluemix:...-bluemix.cloudant.com"
-        }
+    },
+    "debug":true
 }

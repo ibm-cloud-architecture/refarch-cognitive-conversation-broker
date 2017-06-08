@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import { ConversationService }  from './conversation.service';
 import { Sentence } from "./Sentence";
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -11,12 +12,15 @@ import { Sentence } from "./Sentence";
 
 export class ConversationComponent {
   currentDialog : Sentence[]=[];
-  context:any; // used to keep the Conversation context
+  context={'type':'base'}; // used to keep the Conversation context
   message:string;
+  type:string = "base";
   /**
   When creating a conversation component call Watson to get a greetings message as defined in the Dialog. This is more user friendly.
   */
-  constructor(private convService : ConversationService){
+  constructor(private convService : ConversationService, private route: ActivatedRoute){
+    // depending of the url parameters the layout can be simple or more demo oriented with instruction in html
+    this.type=this.route.snapshot.params['type'];
     // Uncomment this line if you do not have a conversation_start trigger in a node of your dialog
     this.callConversationBFF("Hello");
   }
@@ -25,6 +29,7 @@ export class ConversationComponent {
   queryString=""
 
   callConversationBFF(msg:string) {
+    this.context['type']=this.type; // inject the type of caller so the BFF can call different conversation workspace
     this.convService.submitMessage(msg,this.context).subscribe(
       data => {
         this.context=data.context;
@@ -39,16 +44,17 @@ export class ConversationComponent {
     )
   }
 
+  // method called from html button
   submit(){
     let obj:Sentence = new Sentence();
     obj.direction="to-watson";
     obj.text=this.queryString;
     this.currentDialog.push(obj);
-
     this.callConversationBFF(this.queryString);
     this.queryString="";
   }
 
+  // instead to click on button if user hits enter/return key
   keyMessage(event){
      if(event.keyCode == 13) {
         this.submit();

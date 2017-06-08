@@ -13,39 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var config = require('../env.json');
-var watson = require('watson-developer-cloud');
-var vcapServices = require('vcap_services');
-var extend = require('extend');
+const config = require('../env.json');
+const watson = require('watson-developer-cloud');
 
-const debug=true;
-// print a message when the server starts listening
-if (debug) {
-    var wcconfig = extend(config.conversation, vcapServices.getCredentials('conversation'));
-    console.log("--- Connect to Watson Conversation named: " + wcconfig.conversationId);
+
+const conversation = watson.conversation({
+  username: config.conversation.username,
+  password: config.conversation.password,
+  version: 'v1',
+  version_date: config.conversation.version
+});
+if (config.debug) {
+    console.log("--- Connect to Watson Conversation named: " + config.conversation.conversationId);
 }
+
+var sendMessage = function(message,wkid,next){
+  if (config.debug) {console.log(">>> "+JSON.stringify(message,null,2));}
+  if (message.context.conversation_id === undefined) {
+      message.context["conversation_id"]=config.conversation.conversationId;
+  }
+  conversation.message({
+      workspace_id: wkid,
+      input: {'text': message.text},
+      context: message.context
+    },  function(err, response) {
+        if (err)
+          console.log('error:', err);
+        else {
+          next(response);
+        }
+
+    });
+}
+
 /**
 Submit the user's response or first query to Watson Conversation.
 */
-exports.submit = function(message,next) {
-      var wcconfig = extend(config.conversation, vcapServices.getCredentials('conversation'));
-      var conversation = watson.conversation({
-        username: wcconfig.username,
-        password: wcconfig.password,
-        version: 'v1',
-        version_date: wcconfig.version
-      });
-      if (message.context === undefined) {
-          message.context={"conversation_id":wcconfig.conversationId};
-      }
-      conversation.message({
-          workspace_id: wcconfig.workspaceId,
-          input: {'text': message.text},
-          context: message.context
-        },  function(err, response) {
-            if (err)
-              console.log('error:', err);
-            else
-              next(response);
-        });
+exports.submitITSupport = function(message,next) {
+      sendMessage(message,config.conversation.workspace1,next);
+}
+
+exports.submitSODBHelp = function(message,next) {
+      sendMessage(message,config.conversation.workspace2,next);
 }
