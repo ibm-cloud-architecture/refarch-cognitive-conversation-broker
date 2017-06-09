@@ -47,7 +47,7 @@ npm install
 * You need to install [nodemon](https://nodemon.io/) with ``` sudo npm install -g nodemo```
 
 # Demonstration script
-If you want to see the conversation working go to the [deployed app](http://refarch-wcs-broker.mybluemix.net/) and run the following [demonstration script](demo/demoscript.md).
+If you want to see the conversation working go to the [deployed app](http://refarch-wcs-broker.mybluemix.net/) and run the following [demonstration script](doc/demo/demoscript.md).
 
 # Code explanation  
 The project is split into two parts: the client side that is an Angular 2 single page application (code under client folder) and the server which is an expressjs app with code under folder:
@@ -195,7 +195,22 @@ var sendMessage = function(message,wkid,next){
 }
 ```
 
-As the conversation holds a context object to keep information between different interactions, the code specifies a set of needed attributes: input, context and workspace ID which can be found in the Watson Conversation Service. If the context is empty from the first query, the conversationId is added. See Watson Conversation API for information about the context.
+As the conversation holds a context object to keep information between different interactions, the code specifies a set of needed attributes: input, context and workspace ID which can be found in the Watson Conversation Service. If the context is empty from the first query, the conversationId is added. See [Watson Conversation API](https://www.ibm.com/watson/developercloud/conversation/api/v1/) for information about the context.
+
+### Service orchestration
+A broker code is doing service orchestration. There are two examples illustrated in the `api.js` code in the the `var itSupportConversation = function(req,res)` function and in the callback method called when Watson conversation return a response `conversation.submitITSupport(req.body, function(response) `:  
+
+```javascript  
+...
+      if (rep.context.action === "trigger" && rep.context.actionName === "supplierOnBoardingProcess") {
+            bpmoc.callBPMSupplierProcess(rep.context.customerName,rep.context.productName);
+      }
+   }
+
+```  
+
+See this [note](doc/integrate-bpm.md) for BPM integration detailed.
+For detail on the persistence done in Bluemix Cloudant see: [Peristence](doc/persistence.md)  
 
 ## Angular 2 client app
 The code is under *client* folder. It was built using the Angular command line interface (`ng new <aname>``). The `ng` tool with the `new` command creates the foundation for a simple Angular 2 web app with the tooling to build and run a light server so the UI developer can work on the layout and screen flow without any backend. It is possible to use the angular 2 server and be able to develop and test the user interface using

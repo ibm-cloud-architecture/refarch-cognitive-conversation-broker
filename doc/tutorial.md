@@ -161,7 +161,8 @@ Then entering one of the choice like “Inventory Plus” will give not the expe
 
 Make sure you try out some statements that aren’t exactly the same as your training data.
 
-Adding any new entity or intent, will make Watson Conversation retraining its classifier as we could see in the Try it out window.
+Adding any new entity or intent, will make Watson Conversation retraining its classifier as we could see in the Try it out window.  
+
 ![](tutorial/wcs-training.png)
 
 Before going farther in the detail of using conversation context variable, we will try to access the conversation via API for that see the separate [instructions](use-apis.md).

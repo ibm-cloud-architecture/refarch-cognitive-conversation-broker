@@ -1,6 +1,7 @@
 # Demonstration script
 Welcome to IT Support demonstration, which handles conversation for internal IT application support.
 
+# Use case
 The support director wants to modernize the way to support internal staff and offload his team from basic work. Currently 20000 tickets are issued in a year. 50% of the calls are answered in 7 minutes whereas there are many situations that reach up to 70 minutes for resolution. 92% of the calls are resolved by level 1 support. Employees of the Case Inc engage with customer support mostly through phones. Today, call center agents struggle to find some of the answers in a timely fashion as the systems are not integrated. This results in loss of productivity and frustration on the part of the bank employees. Level 1 support team get frustrated at times because of unavailability of the right information and proper guidance. The Level 1 support has to consult the Level 2 support team members to get some answers.   
 
 The deployed application is visible here: [http://refarch-wcs-broker.mybluemix.net/](http://refarch-wcs-broker.mybluemix.net/)
@@ -9,7 +10,7 @@ The home page has two choices
 ![Home](demo-home.png)
 
 ## IT support Conversation
-Click to *Ask IT Support* button to reach the IT Support chat bot:  
+In the home page click to *Ask IT Support* button to reach the IT Support chat bot. The left side of the page gives summary of the demo steps  
 
 ![IT Support bot](it-support-bot.png)
 
@@ -38,12 +39,18 @@ The process is created and the business process calls Watson Discovery to search
 ![BPD](https://github.com/ibm-cloud-architecture/refarch-cognitive-supplier-process/blob/master/docs/bpm-supplieronboarding.png)
 
 The user can then claim a task in his working basket on BPM Process portal
-![Process Portal](https://github.com/ibm-cloud-architecture/refarch-cognitive-supplier-process/blob/master/docs/bpm-supplieronboarding.png)  
-to see the search results and assess the risk to add this supplier as business partner.
+![Process Portal](https://github.com/ibm-cloud-architecture/refarch-cognitive-supplier-process/blob/master/docs/SOBD-processcenter.png)  
+
+To see the search results and assess the risk to add this supplier as business partner.  
 ![WDS results](https://github.com/ibm-cloud-architecture/refarch-cognitive-supplier-process/blob/master/docs/wds-results.png)  
+
 If accepted the supplier is added to the blockchain network.
 
 ## Integrate Chatbot
 
-The chat bot user interface can be embedded inside a BPM coach and called from a *Get help* button. The action triggers a popup window, which is an iframe, which call the conversation broker user interface to the url: [http://refarch-wcs-broker.mybluemix.net/conversation/sodb](http://refarch-wcs-broker.mybluemix.net/conversation/sodb).
+The chat bot user interface can be embedded inside a BPM coach and called from a *Get help* button. The action triggers a popup window, which is an iframe, which call the conversation broker user interface to the url: [http://refarch-wcs-broker.mybluemix.net/conversation/sodb](http://refarch-wcs-broker.mybluemix.net/conversation/sodb).  
+As illustrated in the screen shot below:  
+
 ![chat bot in iframe](https://github.com/ibm-cloud-architecture/refarch-cognitive-supplier-process/blob/master/docs/bpm-wcs-iframe.png)
+
+For detail on the implementation of the process see this [repository](https://github.com/ibm-cloud-architecture/refarch-cognitive-supplier-process)
