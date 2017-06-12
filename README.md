@@ -418,7 +418,7 @@ A detailed [tutorial](doc/tutorial.md) should help you build the Watson Conversa
 # Deploy to Bluemix
 To be able to deploy to bluemix, you need a bluemix account and the command line interface.  
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/jbcodeforce/refarch-cognitive-conversation-broker)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker)
 
 You can use the ```cf push <bluemix-app-name>```
 
