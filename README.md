@@ -25,15 +25,14 @@ The current version is used for IBM internal [training](./doc/tutorial.md) and d
 You may fork this project for your own purpose and develop on top of it. If you want to contribute please submit a pull request on this repository, see [rule of contribution](https://github.com/ibm-cloud-architecture/refarch-cognitive#contribute)
 
 
-## Expected skill set
-From the expected [common](https://github.com/ibm-cloud-architecture/refarch-cognitive#Expected-skill-set) skill set for this cyan compute this project adds
-* For production deployment the following concepts are import to consider: circuit breaker, cascading failure, so the conversation broker code is using [Hystrix js](https://www.npmjs.com/package/hystrixjs) as an implementation model.
-
-and using this [tutorial](./doc/tutorial.md) you should be able to develop the Watson Conversation workspace with intent, entities definition and conversation flow.
+## Expected knowledge
+From the expected [common](https://github.com/ibm-cloud-architecture/refarch-cognitive#Expected-skill-set) skill set defined for *cyan compute* the reader needs to get some good understanding of the following concepts:
+* For production deployment: circuit breaker, cascading failure, so the conversation broker code is using [Hystrix js](https://www.npmjs.com/package/hystrixjs) as an implementation model.
+* Know how to design a Watson Conversation, if not familiar doing the attached [step by step tutorial](./doc/tutorial.md) should help you  developing the Watson Conversation workspace with intent, entities definition and conversation flow needed for the IT support demonstration.
 
 ## Prerequisites
 
-* You need your own github account
+* You need your own github.com account
 * You need to have a Bluemix account, and know how to use cloud foundry command line interface to push the application to Bluemix.
 * You need to have [nodejs](https://nodejs.org/en/) installed on your computer with the [npm](https://www.npmjs.com/) installer tool.
 * Clone current repository, or if you want to work on the code, fork it in your own github repository and then clone your forked repository on your local computer.
