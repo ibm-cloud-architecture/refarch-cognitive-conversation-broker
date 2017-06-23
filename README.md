@@ -13,7 +13,7 @@ The project includes an [angular 2](http://angular.io) web application to illust
 ![WCS Reference Architecture](doc/readme/WCS-ra.png) as the 'Conversation Application' icon.
 
 ## Current Version
-The current version is used for IBM internal [training](./doc/tutorial.md) and demonstration: it is functional and supports the current features:
+The current version is used for IBM internal [training](./doc/tutorial/README.md) and demonstration: it is functional and supports the current features:
 * User interface is done with [Angular 2](angular.io) and support a simple  input field to enter questions to Watson and get a chat type of user experience. There are two interface versions: one with tutorial and one without.
 * The supported questions depend on the Intents defined in Watson Conversation. Two proposed Watson Conversation workspaces are available under the folder [wcs-workspace](./wcs-workspace) as JSON files:
   * one to support the CASE Inc IT support chat bot solution.
@@ -28,7 +28,7 @@ You may fork this project for your own purpose and develop on top of it. If you 
 ## Expected knowledge
 From the expected [common](https://github.com/ibm-cloud-architecture/refarch-cognitive#Expected-skill-set) skill set defined for *cyan compute* the reader needs to get some good understanding of the following concepts:
 * For production deployment: circuit breaker, cascading failure, so the conversation broker code is using [Hystrix js](https://www.npmjs.com/package/hystrixjs) as an implementation model.
-* Know how to design a Watson Conversation, if not familiar doing the attached [step by step tutorial](./doc/tutorial.md) should help you  developing the Watson Conversation workspace with intent, entities definition and conversation flow needed for the IT support demonstration.
+* Know how to design a Watson Conversation, if not familiar doing the attached [step by step tutorial](./doc/tutorial/README.md) should help you  developing the Watson Conversation workspace with intent, entities definition and conversation flow needed for the IT support demonstration.
 
 ## Prerequisites
 

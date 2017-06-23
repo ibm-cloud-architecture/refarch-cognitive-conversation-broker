@@ -1,23 +1,25 @@
 # Watson Conversation Hands-on Tutorial
 
-In this tutorial you will implement a simple *'IT Support help-me'* conversation bot in the context of "Case Inc" internal portal, which  is a medium size retail company, where employees access a set of intranet business applications. The chat bot helps to streamline IT support queries
+In this tutorial you will implement a simple *'IT Support help-me'* conversation chatbot in the context of "Case Inc" internal portal, which  is a medium size retail company, where employees access a set of intranet business applications. The chatbot helps to streamline IT support queries by automating the dialog flow.
 
 ## Business use case
 The support director wants to modernize the way to support internal staff and offload his team from basic work. Currently 20000 tickets are issued in a year. 50% of the calls are answered in 7 minutes whereas there are many situations that reach up to 70 minutes for resolution. 92% of the calls are resolved by level 1 support. Employees of the Case Inc engage with customer support mostly through phones. Today, call center agents struggle to find some of the answers in a timely fashion as the systems are not integrated. This results in loss of productivity and frustration on the part of the bank employees. Level 1 support team get frustrated at times because of unavailability of the right information and proper guidance. The Level 1 support has to consult the Level 2 support team members to get some answers.   
 
-As presented in the [Watson Conversation reference architecture diagram](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture) this tutorial addresses the Ground Truth development (3), the conversation flow design and the run time processing (4) from a business application simple interface (9).
+As presented in the [Watson Conversation reference architecture diagram](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture) this tutorial addresses the Ground Truth development with the conversation flow design (E) and the run time processing (4,7), integrated with chatbot interface (1), and controlled by the application logic - or **broker** micro service.
+![Reference Architecture Diagram](wcs-ra.png)  
 
 ## Table of content
-* [Watson Conversation Quick Summary](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#Watson-Converation-Quick-Summary)
+In this tutorial you will be able to learn the following:  
+* [What is Watson Conversation (Quick Summary)](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/README.md#Watson-Converation-Quick-Summary)
 * [Development Steps](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#development-steps)
 * [Applying Design Thinking](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#design-thinking)
 * [Hands on lab - Step by step](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#Hands-on-lab---Step-by-step)
 
 ## Watson Conversation Quick Summary
-To have a quick understanding of Watson conversation read the [overview](https://www.ibm.com/watson/developercloud/doc/conversation/index.html) section.
+To have a quick understanding of Watson Conversation, you may want to read the [product overview](https://www.ibm.com/watson/developercloud/doc/conversation/index.html) section.
 ![Conversation Components](wcs-view.png)
 
-As a summary, you use the Watson Conversation service to create a **bot**. This is the generic term for a piece of software that provides automated responses to user input. The bot is hosted in the cloud and is highly available. All the information that defines your bot's behavior is contained in a **workspace**.  
+As a summary, you use the Watson Conversation service to create  **chatbot**. This is the generic term for a piece of software that provides automated responses to user input. The bot is hosted in the cloud and is highly available. All the information that defines your bot's behavior is contained in a **workspace**.  
 
 You create an **application** that enables your users to interact with the bot. The application passes user's input to the bot, possibly with some additional context information, and presents responses from the bot to the user.  
 
@@ -50,7 +52,7 @@ The following tasks have to be done for a project involving Watson Conversation:
 When implementing a cognitive solution, we may want to apply the [design thinking approach](dt.md) to develop innovative business impact application.
 
 ## Hands on lab - Step by step
-So now let start doing your own conversation!.
+So now let start doing your own *IT Support* conversation!.
 ### Task 1 - Create Conversation Service
  Using your bluemix account, add a Watson Conversation Service. Select Catalog > Services > Watson.
 ![Bluemix Watson Services](bmx-watson-serv.png)  

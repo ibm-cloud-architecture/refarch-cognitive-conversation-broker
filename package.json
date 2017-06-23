@@ -40,7 +40,7 @@
     "botkit": "^0.2.2"
   },
   "devDependencies": {
-    "@angular/cli": "latest",
+    "@angular/cli": "^2.4.10",
     "@angular/compiler": "^2.4.10",
     "@angular/compiler-cli": "^2.4.0",
     "@types/jasmine": "2.5.38",
