@@ -49,7 +49,7 @@ The following tasks have to be done for a project involving Watson Conversation:
 ![Tasks](wcs-dev-tasks.png)
 
 ## Applying Design Thinking
-When implementing a cognitive solution, we may want to apply the [design thinking approach](dt.md) to develop innovative business impact application.
+When implementing a cognitive solution, we may want to apply the [design thinking approach](../designthinking/dt.md) to develop innovative business impact application.
 
 ## Hands on lab - Step by step
 So now let start doing your own *IT Support* conversation!. We organized the training into layer so beginners can focus on developing Watson Conversation artifacts and test within Watson Conversation Tool, while developers may study and tune the Broker code to support more advance features.
@@ -194,8 +194,9 @@ Using the 3 vertical dots on the right side of the response area, you can swap t
 ![](wcs-otherwisejson.png)
 
 #### Defining the 'access application' dialog flow
-Now we can create dialog branch to handle the ‘access application’ intent. Select `Add node` button after selecting Greeting handle to add a new top level node
-![Add node](wcs-diag-add-node.png)
+Now we can create dialog branch to handle the ‘access application’ intent. Select `Add node` button after selecting `Handle Greetings` node to add a new top level node, specify a name (Handle application access), and then in the if bot recognizes condition enter `#ApplicationAccess`.
+
+![Add node](add-app-acc-node.png)
 
 When a user enters a query about application access he will, most likely, specify one of the supported application, something like: `I want to access application abc`. Therefore in the Application Access node we will add sub branches for each known application and the node could ask more question or provide directly a solution.
 Starting by AbC, use the + sign on the right side of the ‘Application Access’ node so we can create condition on the entity. In the condition select the **@application:AbC** and then provide the solution to access the app.  
