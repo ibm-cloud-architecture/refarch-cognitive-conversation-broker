@@ -15,7 +15,7 @@ In this tutorial you will be able to learn the following:
 * [How to apply Design Thinking for cognitive solution](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#design-thinking)
 * [Hands on lab - Step by step](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#Hands-on-lab---Step-by-step)
 
-## Watson Conversation Quick Summary
+# Watson Conversation Quick Summary
 To have a quick understanding of Watson Conversation, you may want to read the [product overview](https://www.ibm.com/watson/developercloud/doc/conversation/index.html) section.
 ![Conversation Components](wcs-view.png)
 
@@ -48,14 +48,14 @@ The following tasks have to be done for a project involving Watson Conversation:
 
 ![Tasks](wcs-dev-tasks.png)
 
-## Applying Design Thinking
+# Applying Design Thinking
 When implementing a cognitive solution, we may want to apply the [design thinking approach](../designthinking/dt.md) to develop innovative business impact application.
 
-## Hands on lab - Step by step
+# Hands on lab - Step by step
 So now let start doing your own *IT Support* conversation!. We organized the training into layer so beginners can focus on developing Watson Conversation artifacts and test within Watson Conversation Tool, while developers may study and tune the Broker code to support more advance features.
 For beginners, please perform the tasks 1 to 6. Developers can do all the tasks.
 
-### Pre-requisites
+## Pre-requisites
 To design the Conversation you need
 * to have a Bluemix account
 * clone / download the github repository: https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker as you may need to use some of the file to expedite your work.
@@ -64,7 +64,7 @@ To develop on top of the Broker code, or being able to run locally or on Bluemix
 * Knowledge of nodejs, expressjs
 * Some knowledge of Angular 2
 
-### Task 1 - Create Conversation Service
+## Task 1 - Create Conversation Service
  Using your bluemix account, add a Watson Conversation Service. Select Catalog > Services > Watson > Conversation
 ![Bluemix Watson Services](bmx-watson-serv.png)  
 
@@ -76,7 +76,7 @@ Once created you can launch the **Conversation Tool** to develop the conversatio
 
 The *Car Dashboard -Sample* is a predefined conversation used to give you some implementation examples.
 
-### Task 2 - Creating a workspace
+## Task 2 - Creating a workspace
 The workspaces enable you to maintain separate intents, user examples, entities, and dialog flows for each application. The conversation service uses a step by step, wizard like, approach to guide the developer to create workspace, intents, etc..  
 Within the Workspaces panel, click on the "Create a new workspace" tile.   
 ![Create workspace](wcs-wkp.png)
@@ -92,7 +92,7 @@ From the discussion with the Support team, the Conversation developer arrives wi
 
 Today each of those questions are documented as FAQ inside the Support team document repository. Even some solutions are persisted in a relational database in the form of application -> problem -> solution.
 
-### Task 3 - Creating intents
+## Task 3 - Creating intents
 
 In the context of this tutorial we can extract the following intents
 * Access to a business applications like expense report, AbC.  
@@ -121,7 +121,7 @@ As there are a lot of intents that can be reused from conversation to  conversat
 
 Using **Import** link in the Intents page, import the **wcs-workspace/ITSupport-Intents.csv** file to get the IT support demonstration intents.
 
-### Task 4 - Intent Unit testing
+## Task 4 - Intent Unit testing
 As soon as you have created one intent you can test it, using the **‘Ask Watson’** button on the top right corner of the conversation editor.
 
 ![Ask Watson](Ask-Watson.png)
@@ -132,7 +132,7 @@ Enter one of the example, you should get the ``#greetings` intent identified by 
 
 So it works. You can test some other intents from the imported ones.
 
-### Task 5 - Adding entities  
+## Task 5 - Adding entities  
 
 An entity is a portion of the user's input that you can use to provide a different response to a particular intent.
 Click on the "Entities" link at the top of the page.  Then the **Create new** button.
@@ -156,7 +156,7 @@ If you open the the **Ask Watson** tool immediately after importing the entities
 
 We are now ready to create the dialog flow.
 
-### Task 6 - Building the dialog
+## Task 6 - Building the dialog
 When your intents and entities are specified, you can move on to constructing the dialog flow.
 ![Dialog](wcs-dialog.png)  
 
@@ -166,7 +166,7 @@ A dialog is made up of nodes, which define steps in the conversation.
 
  What you see are two "Dialog Nodes". The first is the standard "Welcome" message and the other is a catch-all "Anything else". Dialog nodes are chained together in a tree structure to create an interactive conversation with the end user. The evaluation is top down, so in the default two nodes, the assessment will be done on Welcome and then Anything else node. If you click on the "Welcome" node you will see that the standard Watson response is "Hello. How can I help you?". Using **Ask Watson** tool it is possible to validate how the flow works.
 
-#### Defining Greetings node
+### Defining Greetings node
 The first node should address greetings, in a response to a query like: "hello", so select the `welcome` node and click to the `Add node` button at the top of the screen:
 ![](Add-greetings.png)
 
@@ -186,27 +186,28 @@ Your initial node has two plus signs, one to the right and one at the bottom. Th
 
 You need to create a dialog branch for each intent, to gather any required information and make helpful responses.
 
-#### Managing Anything else use case
+### Managing Anything else use case
 The bottom node is to manage otherwise, meaning it reach this node is none of the defined intents are matched. It could prompt a default message as illustrated below.
 ![](wcs-otherwise.png)
 
 Using the 3 vertical dots on the right side of the response area, you can swap to the JSON editor, to assess what is the data returned as part of the conversation interaction. The json document includes an output json object with a text with different values. Add to the output a new attribute named `Missing case` and set it to true. When persisting the conversation flow, it will be possible to link the query that was not addressed by the dialog nodes, so later on the Conversation developer can add more cases if it makes sense.
 ![](wcs-otherwisejson.png)
 
-#### Defining the 'access application' dialog flow
+### Defining the 'access application' dialog flow
 Now we can create dialog branch to handle the ‘access application’ intent. Select `Add node` button after selecting `Handle Greetings` node to add a new top level node, specify a name (Handle application access), and then in the if bot recognizes condition enter `#ApplicationAccess`.
 
 ![Add node](add-app-acc-node.png)
 
-When a user enters a query about application access he will, most likely, specify one of the supported application, something like: `I want to access application abc`. Therefore in the Application Access node we will add sub branches for each known application and the node could ask more question or provide directly a solution.
-Starting by AbC, use the + sign on the right side of the ‘Application Access’ node so we can create condition on the entity. In the condition select the **@application:AbC** and then provide the solution to access the app.  
+When a user enters a query about application access he will, most likely, specify one of the supported application, something like: `I want to access application abc`. Therefore in the Application Access node we will add multiple conditions by looking at the different possible entities. As illustrated in figure above the first condition is testing on the presence of the entity `@application:AbC`, when it matches the response return a static url. We will demonstrate later how to make the URL, clickable from the conversation user interface in the chatbot application.
 
-![Abc Access](wcs-diag-abc-access.png)  
+To add more conditions inside the same node, select the `Add another response` link at the bottom conditions panel:
+![](Add-condition.png)
 
-If you test the dialog you will see the intent and entity are understood but the solution is not given. There is not path from ‘Application Access’ node to the ‘AbC access’ node. To make the connection there is a Link icon within ‘Application Access’ node to define the link between Application Access node and AbC node.
-![Link to response](wcs-diag-abc-link.png)  
+In the condition select the **@application:ExpenseReport** and then provide the solution to access the app. Do the same for all the entities you have defined for the Application.
 
-Now a test with the sentence: I want to access application AbC will gives intent: ApplicationAccess, entity application AbC and then the node match and gives the expected response:
+![Abc Access](app-access-conditions.png)  
+
+Now a test with the sentence: `I want to access application AbC` will gives intent: ApplicationAccess, entity application AbC and then the node match and gives the expected response:
 ![Unit testing AbC access](wcs-diag-abc-ut.png)  
 
 Finally, if the user does not specify any application we want to ask him which one to access from a list of predefined app. This is another response pattern where predefined content can be selected by user. So add a node like below:
@@ -214,7 +215,7 @@ Finally, if the user does not specify any application we want to ask him which o
 
 Now if you enter a sentence like: “Access application”, then it will propose the expected response.
 
-Then entering one of the choice like “Inventory Plus” will give not the expected result, as the classifier extract the intent ‘Greetings”. But you can enforce Watson Conversation to do a better job in the future by selecting the good answer for him: select `applicationAccess` intent and then Watson will retrain. Once done a second test will make the conversation works as expected.
+Then entering one of the choice like “Inventory Plus” may not give the expected result, as the classifier  may have extracted the wrong intent. From the unit test you can enforce Watson Conversation to do a better job in the future by selecting the good answer for him: select `applicationAccess` intent and then Watson will retrain. Once done a second test will make the conversation works as expected.
 
 Make sure you try out some statements that aren’t exactly the same as your training data.
 
@@ -228,7 +229,7 @@ The top level of dialog nodes should contain an anything_else node as the last
 
 
 ### Task 7 - Using API
-Before going farther in the detail of using conversation context variable, we will try to access the conversation via API for that see the separate [instructions](use-apis.md).
+Before going farther in the detail of using conversation context variable, we will try to access the conversation via API for that see the separate [instructions](../use-apis.md).
 
 ### Task 8 - Advanced Dialog Work
 Each time the dialog returns a response and waits for user input, it stores the ID of the node at which the conversation should resume. This node is called the contextual node, and its ID is added to the context.system.dialog_stack property, which contains a JSON array of dialog node IDs that are currently on the dialog stack.
