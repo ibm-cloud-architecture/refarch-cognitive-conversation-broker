@@ -53,7 +53,7 @@ When implementing a cognitive solution, we may want to apply the [design thinkin
 
 ## Hands on lab - Step by step
 So now let start doing your own *IT Support* conversation!. We organized the training into layer so beginners can focus on developing Watson Conversation artifacts and test within Watson Conversation Tool, while developers may study and tune the Broker code to support more advance features.
-For beginners, please perform the tasks 1 to  
+For beginners, please perform the tasks 1 to 6. Developers can do all the tasks.
 
 ### Pre-requisites
 To design the Conversation you need
@@ -150,7 +150,7 @@ The *Fuzzy logic* is a feature to let Watson accept misspelled word. This capabi
 
 As we did for intents, it is possible to reuse entities definition with the export an import capabilities. So you could import the file: **wcs-workspace/ITSupport-Entities.csv**
 
-We can unit test the entity extraction using the **Ask Watson** tool: by entering the question: **I want to access application AbC**. The outcome is illustrated in diagram below. Entity and intents are well understood.
+If you open the the **Ask Watson** tool immediately after importing the entities, you will see a message that 'Watson is training'. So using your input Watson Conversation use classification on your training set. We can unit test the entity extraction using the **Ask Watson** tool: by entering the question: **I want to access application AbC**. The outcome is illustrated in diagram below. Entity and intents are well understood.
 
 ![Test entity](ut-app-abc.png)
 
@@ -164,11 +164,16 @@ A dialog is made up of nodes, which define steps in the conversation.
 
 ![](wcs-two-nodes.png)  
 
- What you see are two "Dialog Nodes". The first is the standard "Welcome" message and the other is a catch-all "Anything else". Dialog nodes are chained together in a tree structure to create an interactive conversation with the end user.
+ What you see are two "Dialog Nodes". The first is the standard "Welcome" message and the other is a catch-all "Anything else". Dialog nodes are chained together in a tree structure to create an interactive conversation with the end user. The evaluation is top down, so in the default two nodes, the assessment will be done on Welcome and then Anything else node. If you click on the "Welcome" node you will see that the standard Watson response is "Hello. How can I help you?". Using **Ask Watson** tool it is possible to validate how the flow works.
 
 #### Defining Greetings node
-The first node you will add is to support how to handle the #greetings intent, so let be polite and ask how the bot can help.
+The first node should address greetings, in a response to a query like: "hello", so select the `welcome` node and click to the `Add node` button at the top of the screen:
+![](Add-greetings.png)
+
+A new node is added between the existing two. Name it `Handle Greetings`, and change the condition `if bot recognizes:` to `#greetings". The `#` represents a prefix for intent. So the condition is triggered when the Watson natural language classifier underneath is classifying the query as a `greeting` intent.  Finally in the responses part add the following responses.
+
 ![Greeting Node](wcs-diag-greeting.png)  
+
 The above diagram also illustrates the multiple responses pattern to avoid to be repetitive, the bot can present different answers to the same query. It is possible to let the system picks up randomly an answer from the list of potential responses.
 
 Use the try it out feature (right top corner icon) to unit test your dialog:  
@@ -181,16 +186,18 @@ Your initial node has two plus signs, one to the right and one at the bottom. Th
 
 You need to create a dialog branch for each intent, to gather any required information and make helpful responses.
 
-#### Managing otherwise use case
-Your second node is to manage otherwise, and it could prompt a default message as illustrated below.
+#### Managing Anything else use case
+The bottom node is to manage otherwise, meaning it reach this node is none of the defined intents are matched. It could prompt a default message as illustrated below.
 ![](wcs-otherwise.png)
-The response is defined using the JSON view of the response (access it using the 3-dots icone on the right side of the response editor). It includes an output json object with a text. The other interesting part is the added variable "Missing case" set to true. When persisting the conversation flow, it will be possible to link the query that was not addressed by the dialog nodes, so later on the Conversation developer can add more cases if it makes sense.
+
+Using the 3 vertical dots on the right side of the response area, you can swap to the JSON editor, to assess what is the data returned as part of the conversation interaction. The json document includes an output json object with a text with different values. Add to the output a new attribute named `Missing case` and set it to true. When persisting the conversation flow, it will be possible to link the query that was not addressed by the dialog nodes, so later on the Conversation developer can add more cases if it makes sense.
+![](wcs-otherwisejson.png)
 
 #### Defining the 'access application' dialog flow
-Now we can create dialog branches that handle the ‘access application’ intent. Select a node and click on the + between node to add a branch
+Now we can create dialog branch to handle the ‘access application’ intent. Select `Add node` button after selecting Greeting handle to add a new top level node
 ![Add node](wcs-diag-add-node.png)
 
-When a user enters a query about application access he will, most likely, specify one of the supported application, so on the right side of the Application Access node we will add sub branches for each known application and the node could ask more question or provide directly a solution.
+When a user enters a query about application access he will, most likely, specify one of the supported application, something like: `I want to access application abc`. Therefore in the Application Access node we will add sub branches for each known application and the node could ask more question or provide directly a solution.
 Starting by AbC, use the + sign on the right side of the ‘Application Access’ node so we can create condition on the entity. In the condition select the **@application:AbC** and then provide the solution to access the app.  
 
 ![Abc Access](wcs-diag-abc-access.png)  
@@ -214,10 +221,17 @@ Adding any new entity or intent, will make Watson Conversation retraining its cl
 
 ![](wcs-training.png)
 
+The evaluation round works in two stages. In the first stage, the dialog tries to find an answer in the child nodes of the contextual node. That is, it tries to match all the conditions of the child nodes of this contextual node. If the final child node has a condition of "true", meaning that it is to be used if none of its siblings have been matched, then that node's response is processed. Otherwise, if no match is found, the dialog continues to a second stage in which it tries to find an answer to a particular input by matching the top level of dialog nodes.
+
+The top level of dialog nodes should contain an anything_else node as the last node, which is hit when no match occurred in the conditions of the top level nodes. Typically, if an anything_else node is defined, the dialog returns an answer to every user input.
+
+
+### Task 7 - Using API
 Before going farther in the detail of using conversation context variable, we will try to access the conversation via API for that see the separate [instructions](use-apis.md).
 
-#### Using Context
+### Task 8 - Advanced Dialog Work
 Each time the dialog returns a response and waits for user input, it stores the ID of the node at which the conversation should resume. This node is called the contextual node, and its ID is added to the context.system.dialog_stack property, which contains a JSON array of dialog node IDs that are currently on the dialog stack.
+#### Using Context
 State information for your conversation is maintained using the context. The context is a JSON object that is passed back and forth between your application and the Conversation service
 
 Here is an example of context returned from an interaction reaching a top node:
@@ -239,9 +253,7 @@ Here is an example of context returned from an interaction reaching a top node:
    }
 ```
 
-The evaluation round works in two stages. In the first stage, the dialog tries to find an answer in the child nodes of the contextual node. That is, it tries to match all the conditions of the child nodes of this contextual node. If the final child node has a condition of "true", meaning that it is to be used if none of its siblings have been matched, then that node's response is processed. Otherwise, if no match is found, the dialog continues to a second stage in which it tries to find an answer to a particular input by matching the top level of dialog nodes.
 
-The top level of dialog nodes should contain an anything_else node as the last node, which is hit when no match occurred in the conditions of the top level nodes. Typically, if an anything_else node is defined, the dialog returns an answer to every user input.
 
 #### Adding variable to context
 Suppose that we want to return an actionable URL, meaning the response includes a url variable so the end user can click on it to navigate to a new service end point. To illustrate this we will present a URL of a business process deployed on BPM on Cloud. Therefore we are adding a new intent to support the user's query about accessing the "Supplier on boarding business process". Let add the intent named #supplieronboarding with some examples of user's queries:  
