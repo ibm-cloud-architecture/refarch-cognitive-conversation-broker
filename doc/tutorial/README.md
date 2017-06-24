@@ -170,7 +170,7 @@ A dialog is made up of nodes, which define steps in the conversation.
 The first node should address greetings, in a response to a query like: "hello", so select the `welcome` node and click to the `Add node` button at the top of the screen:
 ![](Add-greetings.png)
 
-A new node is added between the existing two. Name it `Handle Greetings`, and change the condition `if bot recognizes:` to `#greetings". The `#` represents a prefix for intent. So the condition is triggered when the Watson natural language classifier underneath is classifying the query as a `greeting` intent.  Finally in the responses part add the following responses.
+A new node is added between the existing two. Name it `Handle Greetings`, and change the condition `if bot recognizes:` to `#greetings`. The `#` represents a prefix for intent. So the condition is triggered when the Watson natural language classifier underneath is classifying the query as a `greeting` intent.  Finally in the responses part add the following responses.
 
 ![Greeting Node](wcs-diag-greeting.png)  
 
@@ -227,18 +227,18 @@ The evaluation round works in two stages. In the first stage, the dialog tries t
 
 The top level of dialog nodes should contain an anything_else node as the last node, which is hit when no match occurred in the conditions of the top level nodes. Typically, if an anything_else node is defined, the dialog returns an answer to every user input.
 
+At this stage you are able to build a static flow. We want now to support getting user input and do something with it.
 
-### Task 7 - Using API
-Before going farther in the detail of using conversation context variable, we will try to access the conversation via API for that see the separate [instructions](../use-apis.md).
 
-### Task 8 - Advanced Dialog Work
+## Task 7 - Advanced Dialog Work
 Each time the dialog returns a response and waits for user input, it stores the ID of the node at which the conversation should resume. This node is called the contextual node, and its ID is added to the context.system.dialog_stack property, which contains a JSON array of dialog node IDs that are currently on the dialog stack.
-#### Using Context
-State information for your conversation is maintained using the context. The context is a JSON object that is passed back and forth between your application and the Conversation service
+### Using Context Object
+State information for your conversation is maintained using the `context`. The `context` is a JSON object that is passed back and forth between your application and the Conversation service.
 
 Here is an example of context returned from an interaction reaching a top node:
-```
-"context": {
+```json
+{
+  "context": {
      "conversation_id": "Conversation-ut",
      "system": {
        "dialog_stack": [
@@ -253,12 +253,14 @@ Here is an example of context returned from an interaction reaching a top node:
        },
        "dialog_in_progress": false
    }
+ }
+}
 ```
 
 
 
-#### Adding variable to context
-Suppose that we want to return an actionable URL, meaning the response includes a url variable so the end user can click on it to navigate to a new service end point. To illustrate this we will present a URL of a business process deployed on BPM on Cloud. Therefore we are adding a new intent to support the user's query about accessing the "Supplier on boarding business process". Let add the intent named #supplieronboarding with some examples of user's queries:  
+### Adding variable to context
+Suppose that we want to return an actionable URL, meaning the response includes a `URL` variable so the end user can click on it to navigate to a new page. To illustrate this we will present a URL of a business process deployed on BPM on Cloud. Therefore we are adding a new intent to support the user's query about accessing the "Supplier on boarding business process". Let add the intent named #supplieronboarding with some examples of user's queries:  
 ![Supplier on boarding](supplier-intent.png)  
 
 A new node is added to the dialog flow, but instead of defining a static text response, we use the *{...}* icon to access the Advanced editor so we can edit the *json* response object:  
@@ -352,7 +354,8 @@ if (req.body.context.action === "getVar") {
 
 The same approach is done in for the product name and once done the interaction set the action to **trigger**.
 
-
+## Task 8 - Using API
+Before going farther in the detail of using conversation context variable, we will try to access the conversation via API for that see the separate [instructions](../use-apis.md).
 
 ## Learn More
 * A super simple chat bot designed for customer service [here](https://www.ibm.com/blogs/watson/2016/12/build-chat-bot)
