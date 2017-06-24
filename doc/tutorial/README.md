@@ -10,9 +10,9 @@ As presented in the [Watson Conversation reference architecture diagram](https:/
 
 ## Table of content
 In this tutorial you will be able to learn the following:  
-* [What is Watson Conversation (Quick Summary)](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/README.md#Watson-Converation-Quick-Summary)
-* [Development Steps](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#development-steps)
-* [Applying Design Thinking](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#design-thinking)
+* [What is Watson Conversation (Quick Summary)](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#watson-conversation-quick-summary)
+* [Understand the Development Steps](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#development-steps)
+* [How to apply Design Thinking for cognitive solution](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#design-thinking)
 * [Hands on lab - Step by step](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#Hands-on-lab---Step-by-step)
 
 ## Watson Conversation Quick Summary
@@ -25,13 +25,13 @@ You create an **application** that enables your users to interact with the bot. 
 
 The bot is **stateless**, that is, it does not retain information from one interchange to the next. The application is responsible for maintaining any continuing information. However, the application can pass information to the bot, and the bot can update the **context** information and pass it back to the application.  
 
-The bot uses natural language understanding and machine learning to extract meaning from the user's input. This process identifies the user's **intent**, which is the goal or purpose of the input. It can also identify an **entity**, which is a term that is mentioned in the input and clarifies the purpose. You train your bot to recognize intents and entities in the input submitted by users. To train your bot on intents, you supply lots of examples of user's input and indicate which intents they map to.
+The bot uses natural language understanding and machine learning to extract meaning from the user's input. This process identifies the user's **intent**, which is the goal or purpose of the asked question. It can also identify an **entity**, which is a term, a noun that is mentioned in the input and narrow the purpose of the request. You train your bot to recognize intents and entities in the input submitted by users. To train your bot on intents, you supply lots of examples of user's input and indicate which intents they map to.
 
 To train your bot on entities, you list the values for each entity and synonyms that users might enter.
 Note: the names of intents and entities, and the text of examples, values, and synonyms, can be exposed in URLs when an application interacts with your bot. Do not store sensitive or personal information in these artifacts.
 As you add information, the bot trains itself; you do not have to take any action to initiate the training.
 
-Finally, after you train your system to recognize intents and entities, you teach it how to respond when it recognizes those intents and entities. You use the **dialog** builder to create conversations with users, providing responses based on the intents and entities that you recognize in their inputs.
+Finally, after you train your system to recognize intents and entities, you teach it how to respond when it recognizes those intents and entities. You use the **dialog** builder to create conversations with users, providing responses based on the intents and entities that the bot recognizes in their inputs.  A dialog is composed of multiple flows and subFlows to design the multiple interactions of the conversation. Intent is supported by a dialog flow.
 
 ## Development Steps
 The following tasks have to be done for a project involving Watson Conversation:
@@ -52,75 +52,119 @@ The following tasks have to be done for a project involving Watson Conversation:
 When implementing a cognitive solution, we may want to apply the [design thinking approach](dt.md) to develop innovative business impact application.
 
 ## Hands on lab - Step by step
-So now let start doing your own *IT Support* conversation!.
+So now let start doing your own *IT Support* conversation!. We organized the training into layer so beginners can focus on developing Watson Conversation artifacts and test within Watson Conversation Tool, while developers may study and tune the Broker code to support more advance features.
+For beginners, please perform the tasks 1 to  
+
+### Pre-requisites
+To design the Conversation you need
+* to have a Bluemix account
+* clone / download the github repository: https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker as you may need to use some of the file to expedite your work.
+
+To develop on top of the Broker code, or being able to run locally or on Bluemix you need
+* Knowledge of nodejs, expressjs
+* Some knowledge of Angular 2
+
 ### Task 1 - Create Conversation Service
- Using your bluemix account, add a Watson Conversation Service. Select Catalog > Services > Watson.
+ Using your bluemix account, add a Watson Conversation Service. Select Catalog > Services > Watson > Conversation
 ![Bluemix Watson Services](bmx-watson-serv.png)  
 
-Once created you can launch the conversation tool to develop the conversation artifacts.  
-
+In the service name enter *ITSupportConversation*, and click **Create** button on the lower right corner. You should see the following page:
 ![Conversation Service](bmx-conv-tool.png)
 
-### Task 2 - Creating a workspace
-The workspaces enable you to maintain separate intents, user examples, entities, and dialogs for each use or application. The conversation service uses a step by step, wizard like, approach to guide the developer to create workspace, intents, etc..  
+Once created you can launch the **Conversation Tool** to develop the conversation artifacts: Click on the "Launch tool" icon to take you to the WCS workspace. This will open another browser window and you should now be on the Watson Conversation Workspace page.
+![](wcs-conv-wksp.png)
 
+The *Car Dashboard -Sample* is a predefined conversation used to give you some implementation examples.
+
+### Task 2 - Creating a workspace
+The workspaces enable you to maintain separate intents, user examples, entities, and dialog flows for each application. The conversation service uses a step by step, wizard like, approach to guide the developer to create workspace, intents, etc..  
+Within the Workspaces panel, click on the "Create a new workspace" tile.   
 ![Create workspace](wcs-wkp.png)
 
-Once the workspace created, we need to add intents using the interface. An Intent is a group of examples of things that a user might say to communicate a specific goal or idea. To identify intents, you begin with something your user might want, and then come up with various ways the user might describe it. Then for each intent, you need to think of the various ways a user might express her desire, that will be the examples. Examples can be developed with crowd sourcing approach.
+Once the workspace created, we need to add **intents** using the Tool. An Intent is a group of examples of things that a user might say to communicate a specific goal or idea. To identify intents, you begin with something your user might want, and then come up with various ways the user might describe it. Then for each intent, you need to think of the various ways a user might express his/her desire, that will be the examples. Examples can be developed using a crowd sourcing approach.
 
-From the discussion with Support team the team arrives with a set of standard questions they received from their end users:
+From the discussion with the Support team, the Conversation developer arrives with a set of standard questions they received from their end users:
 * What is the status of the business application? I could not access it
 * How to get access to a business application?
 * How to reset my password for a specific application?
 * When to renew my workstation?
 * How to bring my own device and connect it to enterprise network?
 
-And specific regulation or business process oriented
-* What is the procedure to manage a reimbursement claim or a specific business process?
-
-Each of those questions are documented as FAQ inside the Support team. Even some solutions are persisted in a relational database in the form of application -> problem -> solution relationship.
+Today each of those questions are documented as FAQ inside the Support team document repository. Even some solutions are persisted in a relational database in the form of application -> problem -> solution.
 
 ### Task 3 - Creating intents
 
 In the context of this tutorial we can extract the following intents
-* Access to a business application or a business process.  
+* Access to a business applications like expense report, AbC.  
 * Reset password
-* Procedure or process to execute
-* Bring own device
+* Access to supplier on boarding business process
+* Bring your own device
 
-So let add those intents in the workspace: the following diagram illustrates how to add application Access intent with some of the training set questions:  
+So let add those intents in the workspace: from the *Build* page, select the Intents link and then Create new button.
 
-![Intents](wcs-intents.png)  
+![Intents](wcs-build-intents.png)  
 
-For each intent we need to add the examples to train the conversation for intent recognition:  
+Enter the intent name `applicationAccess` after the **#**
+ character.
 
 ![Questions](wcs-intent-question.png)  
 
-As there are a lot of intents that can be reused from conversation to other conversation it is possible to define csv files to import intents. The format is presented in following example, one intent in each line  
+Then for each intent you need to add the examples to train the conversation for intent recognition. You can enter the same examples as above figure.
+
+Do the same for the **goodbye** intent.  
+
+![goodbyes](goodbyes-intent.png)
+
+As there are a lot of intents that can be reused from conversation to  conversation implementations, it is possible to define **csv** files anf import them in the Conversation Tool Intents. The csv format is presented in following example, one intent per line  
 
 ![greetings](greetings.png)
 
-import the **wcs-workspace/ITSupport-Intents.csv** file to get the IT support demonstration intents.
+Using **Import** link in the Intents page, import the **wcs-workspace/ITSupport-Intents.csv** file to get the IT support demonstration intents.
 
-### Task 4 - Unit testing
-As soon as you have created intent you can test it, using the **‘Ask Watson’** button on the top right corner of the conversation editor.
-Enter one of the example, you should get the ``#greeting` intent identified by Watson. You can even try new sentence and you may have Watson inferring the good intent.  
+### Task 4 - Intent Unit testing
+As soon as you have created one intent you can test it, using the **‘Ask Watson’** button on the top right corner of the conversation editor.
+
+![Ask Watson](Ask-Watson.png)
+
+Enter one of the example, you should get the ``#greetings` intent identified by Watson. You can even try new sentence and you may have Watson inferring the good intent.  
 
 ![try it](tryitout.png)  
 
+So it works. You can test some other intents from the imported ones.
+
 ### Task 5 - Adding entities  
 
-An entity is a portion of the user's input that you can use to provide a different response to a particular intent. Adding values and synonyms to entities helps your bot learn and understand important details that your users mention.
+An entity is a portion of the user's input that you can use to provide a different response to a particular intent.
+Click on the "Entities" link at the top of the page.  Then the **Create new** button.
+
+![](wcs-entities-panel.png)
+
+Adding values and synonyms to entity helps your chatbot learns and understands important details that your user's mention.
 Each entity definition includes a set of specific entity values that can be used to trigger different responses. Each value can have multiple synonyms, which define different ways that the same value might be specified in user input.
 
 Create entities to represent what the application the user wants to access.  
 
 ![entities](wcs-entities.png)
 
+The *Fuzzy logic* is a feature to let Watson accept misspelled word. This capability can be enabled at the entity level.
+
+As we did for intents, it is possible to reuse entities definition with the export an import capabilities. So you could import the file: **wcs-workspace/ITSupport-Entities.csv**
+
+We can unit test the entity extraction using the **Ask Watson** tool: by entering the question: **I want to access application AbC**. The outcome is illustrated in diagram below. Entity and intents are well understood.
+
+![Test entity](ut-app-abc.png)
+
+We are now ready to create the dialog flow.
+
 ### Task 6 - Building the dialog
 When your intents and entities are specified, you can move on to constructing the dialog flow.
 ![Dialog](wcs-dialog.png)  
-A dialog is made up of nodes, which define steps in the conversation. Dialog nodes are chained together in a tree structure to create an interactive conversation with the end user.
+
+A dialog is made up of nodes, which define steps in the conversation.
+
+![](wcs-two-nodes.png)  
+
+ What you see are two "Dialog Nodes". The first is the standard "Welcome" message and the other is a catch-all "Anything else". Dialog nodes are chained together in a tree structure to create an interactive conversation with the end user.
 
 #### Defining Greetings node
 The first node you will add is to support how to handle the #greetings intent, so let be polite and ask how the bot can help.
