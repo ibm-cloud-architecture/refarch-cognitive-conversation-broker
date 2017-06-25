@@ -329,7 +329,34 @@ Which is illustrated in the last interaction with the clickable button added to 
 
 A lot can be done on the context object. For example, the application code could add elements in the context before calling conversation, then at the condition level in a node, tests can be done on those elements. To use a context variable in your condition, use the format `$variable_name:value` or `$variable_name == 'value'`. The value of the condition might have been set by the application, or in the response portion of a previous dialog node. In the test below the context variable `canAccessSOD` is a Boolean set by accessing some internal authorization service that, for example, return true if a given userid can access an application.  
 
-![](wcs-diag-bool.png)  
+
+### A hierarchical dialog flow.
+In this section we will add a dialog flow to address when a user wants to bring his own device. This flow will use child nodes. If you did not import the intent and entities before, create a new entity for bring your own device question, like illustrated below:
+![byod](byod.png)  
+and for the entities @deviceBrand and @deviceType:
+![device-brand](device-brand.png)  
+
+![device-type](device-type.png)  
+
+And then add a dialog flow, by adding a top level node, with the `#BYOD` intent as recognize condition and a response to engage in multiple interactions:
+![](byod-node1.png)  
+
+To add child node, select the new node and on the right side use the three vertical dots to open a contextual menu, and then select `Add child node`:  
+
+![add node](add-child.png)
+
+You should be able to add 3 sub nodes this way:
+* `Set device brand` to assign a context variable ownedDevice.brand when the entity @deviceBrand is known
+* `Set device type` to assign a context variable ownedDevice.type when the entity @deviceType is known
+* Ask a question if none of the entities were understood
+![](byod-subnodes.png)  
+
+For the last node the condition is set to true so it can always execute. We are using this approach to drive the dialog so the system can ask questions about brand and device type as none of those entities were given so far. Be sure to set to wait for user input in the `And then` action. The figure below illustrates those settings:
+![Specify Device](byod-specify-device.png)   
+Also you need to add other sub nodes to address the new user responses. Context variables are accessible via the $ prefix. So the following conditions test the non-presence of the deviceBrand:   
+![Test on var](var-test.png)
+and the response is to ask for it. Which means the `Ask device brand` node has children to set the `context.deviceBrand` variable when it is found as the entity `@deviceBand`.   
+![Set context var](set-device-brand.png)
 
 ### Using interaction to get parameters to call a web service
 The last example is a little bit more tricky, but it represents a common pattern: in the context of a dialog flow, the set of interactions are aimed to gather input parameters so once the interaction is done, the broker code can call a web service and pass the parameters as part of the payload.
