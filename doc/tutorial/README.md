@@ -13,7 +13,14 @@ In this tutorial you will be able to learn the following:
 * [What is Watson Conversation (Quick Summary)](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#watson-conversation-quick-summary)
 * [Understand the Development Steps](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#development-steps)
 * [How to apply Design Thinking for cognitive solution](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#design-thinking)
-* [Hands on lab - Step by step](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#Hands-on-lab---Step-by-step)
+* [Create Watson conversation service](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#task-1---create-conversation-service) and workspace
+* [Defining intent and entities to help natural language processing](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#task-3---creating-intents)
+* [Building simple dialog flow](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#task-6---building-the-dialog)
+* [Using the context object for more advanced dialog](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#task-7---advanced-dialog-work)
+* [Develop hierarchical flow ](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#a-hierarchical-dialog-flow)
+* [Use variable to get data from conversation](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#using-interaction-to-get-parameters-to-call-a-web-service)
+* [Using the api](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#task-8---using-api)
+
 
 # Watson Conversation Quick Summary
 To have a quick understanding of Watson Conversation, you may want to read the [product overview](https://www.ibm.com/watson/developercloud/doc/conversation/index.html) section.
@@ -382,7 +389,9 @@ if (req.body.context.action === "getVar") {
 The same approach is done in for the product name and once done the interaction set the action to **trigger**.
 
 ## Task 8 - Using API
-Before going farther in the detail of using conversation context variable, we will try to access the conversation via API for that see the separate [instructions](../use-apis.md).
+To use API you need the service credential and use tool to preform HTTP request. See this separate [instructions](../use-apis.md).
+
+For understanding the **broker** code see [this section of the readme](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#code-explanation)
 
 ## Learn More
 * A super simple chat bot designed for customer service [here](https://www.ibm.com/blogs/watson/2016/12/build-chat-bot)
