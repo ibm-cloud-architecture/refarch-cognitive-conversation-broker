@@ -8,7 +8,7 @@ The Implementation addresses multiple facets:
 * The Watson Conversation content in a form of a [workspace](wcs-workspace/ITsupport-workspace.json) to support 'IT Support' help: this is a common pattern of using a chat bot to address a lot of standard queries end users may have about IT applications or hardware, and a second workspace to support conversation inside a BPM coach to ask for help in the context of a process ([Supplier on boarding help](wcs-workspace/ITsupport-workspace.json)).
 * A complete set of aspects to support production deployment like logging, monitoring, resiliency, security.
 
-The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation chat which itself uses the broker APIs. The project is designed as a micro service, deployable as a Cloud Foundry application on [IBM Bluemix](http://www.bluemix.net). The concept of broker is presented in the [IBM Cognitive Reference Architecture for Engagement](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain), specially illustrated in the figure below:
+The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation chat which itself uses the broker APIs. The project is designed as a micro service, deployable as a containerized application on [IBM Bluemix](http://www.bluemix.net) [Kubernetes](https://www.ibm.com/blogs/bluemix/2017/03/kubernetes-now-available-ibm-bluemix-container-service/) Cluster. The concept of broker is presented in the [IBM Cognitive Reference Architecture for Conversation](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain), specially illustrated in the figure below:
 
 ![WCS Reference Architecture](doc/readme/WCS-ra.png) as the 'Conversation Application' icon.
 
@@ -352,7 +352,7 @@ callConversationBFF(msg:string) {
 
 The conversation component needs to have the currentDialog, and as it is a sentence we need to add a Sentence.ts under the conv folder. Sentence is a basic class with a text and a direction. The direction will be used to present who is speaking: to-watson when the user chat, from-watson when Watson answer.
 
-The Context variable is used to keep conversation context between each interaction, this is an important mechanism in Watson conversation to exchange data between application and dialog flow. It is detailed in *Using the context* section of the [tutorial](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial.md#using-context)   
+The Context variable is used to keep conversation context between each interaction, this is an important mechanism in Watson conversation to exchange data between application and dialog flow. It is detailed in *Using the context* section of the [tutorial](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#using-context-object)   
 
 The conversation.service.ts defines the method to do the HTTP request to the backend for frontend server running in nodejs as presented in previous section.
 
