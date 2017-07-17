@@ -1,0 +1,18 @@
+<ol class="breadcrumb">
+    <li class=""><a [routerLink]="['/']">Home</a></li>
+</ol>
+<div class="row">
+  <h3>Welcome to {{title}}</h3>
+  <div class="col-md-4 roundRect" style="box-shadow: 10px 10px 5px #8c4507; border-color: #8c4507;">
+        <h2>Appliance Monitoring</h2>
+        <p>Assess appliance state</p>
+        <p><button (click)="applianceMeasure()" class="btn">Monitoring</button></p>
+  </div>
+
+  <!-- Following is visible for specific compute model -->
+  <div class="col-md-4 roundRect" style="box-shadow: 10px 10px 5px #10d1d1; border-color: #10d1d1;">
+        <h2>Ask Watson</h2>
+        <p>Appliance trouble shooting chat bot</p>
+        <p><button (click)="applianceChat()" class="btn">Ask@Watson</button></p>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="collapse navbar-collapse" id="main-navbar">
+  <ul class="nav navbar-nav">
+      <li class=""><a [routerLink]="['/appliance']">Appliance Advisor</a></li>
+  </ul>
+</div>
+<div class='row'>
+  <div class='col-md-3'>
+    <p>Welcome to Appliance Advisor</p>
+      <ul>
+        <li>Temperature is high</li>
+        <li>appliance is leaking</li>
+      </ul>
+    <br/>
+  </div>
+  <div class="col-md-9">
+     <div class="conversation-container">
+        <div class="scrolling-box">
+          <div *ngFor="let p of currentDialog">
+             <div class="message-box">
+               <div class="{{p.direction}}">
+                  <div class="{{p.direction+'-icon'}}" >
+                    <span *ngIf="p.direction === 'to-watson'" class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <div *ngIf="p.direction === 'from-watson'" class="from-watson-icon">
+                      <img src='assets/images/watson-globe.png' style='width:50px'>
+                    </div>
+                  </div>
+                  <div class="{{p.direction+'-text'}}" [innerHTML]="p.text">
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <form class="form-inline" autocomplete="off" (keydown)="keyMessage($event)">
+            <div class="form-group " style="padding:20px">
+                <input class="form-control message-box"
+                       type="text"
+                       size="60"
+                       [(ngModel)]="queryString"
+                       placeholder="Send a message to Support Bot!"
+                       name="queryString"
+                       autocomplete="off"/>
+                <button class="btn btn-primary" (click)="submit()" type="button">Send</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

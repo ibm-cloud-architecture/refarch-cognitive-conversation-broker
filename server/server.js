@@ -17,15 +17,10 @@
 const express = require('express');
 const path = require('path');
 
-// cfenv provides access to your Cloud Foundry environment
-// for more info, see: https://www.npmjs.com/package/cfenv
-const cfenv = require('cfenv');
 const bodyParser = require('body-parser');
 
 const app = express();
 
-// Get our API routes
-const api = require('./routes/api');
 
 // Parsers for POST JSON PAYLOAD
 app.use(bodyParser.json());
@@ -35,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // Set our api routes
+const api = require('./routes/api');
 app.use('/api', api);
 
 // Catch all other routes and return the index file
@@ -42,14 +38,12 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-// get the app environment from Cloud Foundry
-var appEnv = cfenv.getAppEnv();
 /**
  * Get port from environment and store in Express.
  */
-const port =appEnv.port || '3000';
+const port ='3010';
 
 // start server on the specified port and binding host
 app.listen(port, '0.0.0.0', function() {
-  console.log("Conversation Broker Service v0.0.2 starting on " + appEnv.url);
+  console.log("Conversation Broker Service v0.0.3 starting on " + port);
 });

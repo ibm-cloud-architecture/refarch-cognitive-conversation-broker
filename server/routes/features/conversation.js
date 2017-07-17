@@ -31,11 +31,18 @@ if (config.debug) {
 Submit the user's response or first query to Watson Conversation.
 */
 exports.submitITSupport = function(message,next) {
-      sendMessage(message,config.conversation.workspace1,next);
+  sendMessage(message,config.conversation.workspace1,next);
 }
 
 exports.submitSODBHelp = function(message,next) {
-      sendMessage(message,config.conversation.workspace2,next);
+  sendMessage(message,config.conversation.workspace2,next);
+}
+
+/**
+Control flow logic for the appliance bot, when conversation return action field
+*/
+exports.applianceConversation = function(message,next){
+  sendMessage(message,config.conversation.workspace3,next);
 }
 
 
@@ -49,11 +56,11 @@ var sendMessage = function(message,wkid,next){
       input: {'text': message.text},
       context: message.context
     },  function(err, response) {
-        if (err)
+        if (err) {
           console.log('error:', err);
-        else {
+          next({'Error': "Communication error with Watson Service. Please contact our administrator"});
+        } else {
           next(response);
         }
-
     });
 }

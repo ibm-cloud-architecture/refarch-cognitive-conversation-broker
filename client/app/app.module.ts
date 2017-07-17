@@ -8,11 +8,18 @@ import { AppComponent }         from './app.component';
 import { ConversationComponent} from './conv/conversation.component';
 import { ConversationService }  from './conv/conversation.service';
 import { HomeComponent }        from './home.component';
-
+// added for appliance IoT extends use case
+import { IoTComponent }        from './iot/iot.component';
+import { IoTService }          from './iot/iot.service';
+import { IoTConversation }     from './iot/iotconv.component';
+import { IoTMeasureComponent } from './iot/iotmeasure.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'conversation/:type', component: ConversationComponent },
+  { path: 'appliance', component: IoTComponent },
+  { path: 'applianceMeasure', component: IoTMeasureComponent},
+  { path: 'applianceChat',component: IoTConversation},
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ]
@@ -21,7 +28,10 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    ConversationComponent
+    ConversationComponent,
+    IoTComponent,
+    IoTConversation,
+    IoTMeasureComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +39,7 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ConversationService],
+  providers: [ConversationService,IoTService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
