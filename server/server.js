@@ -20,7 +20,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
-
+var cfenv = require('cfenv');
 
 // Parsers for POST JSON PAYLOAD
 app.use(bodyParser.json());
@@ -41,7 +41,10 @@ app.get('*', (req, res) => {
 /**
  * Get port from environment and store in Express.
  */
-const port ='3010';
+// get the app environment from Cloud Foundry
+var appEnv = cfenv.getAppEnv();
+
+const port = appEnv.port ||'3010';
 
 // start server on the specified port and binding host
 app.listen(port, '0.0.0.0', function() {
