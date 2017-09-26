@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 IBM Corp. All Rights Reserved.
+ * Copyright 2017 IBM Corp. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
-var cfenv = require('cfenv');
 
 // Parsers for POST JSON PAYLOAD
 app.use(bodyParser.json());
@@ -29,24 +28,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Set our api routes
-const api = require('./routes/api');
-app.use('/api', api);
+// Set specific api routes
+var config = require('./config.json');
+require('./routes/api')(app,config);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-/**
- * Get port from environment and store in Express.
- */
-// get the app environment from Cloud Foundry
-var appEnv = cfenv.getAppEnv();
-
-const port = appEnv.port ||'3010';
 
 // start server on the specified port and binding host
-app.listen(port, '0.0.0.0', function() {
-  console.log("Conversation Broker Service v0.0.3 starting on " + port);
+app.listen(config.port, '0.0.0.0', function() {
+  console.log("Conversation Broker Service v0.0.5 09/26/2017 starting on " + config.port);
 });

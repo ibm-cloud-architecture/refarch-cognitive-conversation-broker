@@ -22,8 +22,4 @@ Main page component to display access to the different demo features.
     conversationSodb(){
       this.router.navigate(['conversation/sodb']);
     }
-
-    appliance(){
-      this.router.navigate(['appliance']);
-    }
 }

@@ -35,7 +35,7 @@ export class ConversationComponent {
         this.context=data.context;
         let s:Sentence = new Sentence();
         s.direction="from-watson";
-        s.text=data.text;
+        s.text=data.output.text[0];
         this.currentDialog.push(s)
       },
       error => {

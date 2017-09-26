@@ -17,7 +17,6 @@
  Author: IBM - Jerome Boyer
  */
 var request = require('request');
-var config = require('../env.json');
 
 /*
 Prepare a soap request using the product and company names for BPM on cloud
@@ -25,7 +24,8 @@ deployed application.
 ATTENTION this code is not generic and the SOAP message depends on the exposed
 web service definition of the process application deployed on BPM on Cloud
 */
-exports.callBPMSupplierProcess = function(company,product) {
+exports.module ={
+  callBPMSupplierProcess : function(config,company,product) {
       var xmlBody = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://SOBD/SOAPStart.tws">'+
          '<soapenv:Header/>'+
          '<soapenv:Body>'+
@@ -51,4 +51,5 @@ exports.callBPMSupplierProcess = function(company,product) {
               }
           }
       );
+    }
 }

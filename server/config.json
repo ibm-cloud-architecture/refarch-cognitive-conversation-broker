@@ -1,0 +1,30 @@
+{
+    "conversation" :{
+      "version" : "v1",
+      "versionDate":"2017-02-03",
+      "username":"291d9397-073f-46d9-b0d2-11b54e6ae533",
+      "password":"aDFBIIPYkQlD",
+      "workspace1":"1a3b01f3-4757-444d-a933-a1e648babfc1",
+      "conversationId":"ITSupportConversation",
+      "workspace2":"80b451cc-d4eb-43bf-a4ac-359599cd2405",
+      "workspace3":"80b451cc-d4eb-43bf-a4ac-359599cd2405",
+      "usePersistence": false
+    },
+    "bpmoc" :{
+      "serverName":"vhost001.bpm.ibmcloud.com",
+      "processName":"SOBD/SOAPStart.tws",
+      "basicAuth":"Y29nbml0aXZlYnBtZW1haWxAZ21haWwuY29tOmNvZ25pdGl2ZQ=="
+    },
+    "dbCredentials" : {
+      "url": "https://01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix:cd68d33a28d499bc6211810a56a0b99393a699190630f7811c438149be944500@01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix.cloudant.com"
+    },
+    "discovery": {
+      "username": "e99796c1-3ece-469b-b92a-cb0bace684f9",
+      "password": "ke4LPVTar5ZR",
+      "version_date": "2017-06-25",
+      "environment_id": "b11cca07-ea37-4567-8845-3736ca4b435a",
+      "collection_id": "680f3983-0bc0-496e-8e6e-4f40d040729a"
+     },
+    "debug":true,
+    "port": 3001
+}

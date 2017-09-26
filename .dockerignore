@@ -1,0 +1,12 @@
+**.md
+docs
+build
+.git
+.gitignore
+Jenkinsfile
+README.md
+chart
+gradle
+gradlew
+gradlew.bat
+test
