@@ -41,4 +41,5 @@ app.get('*', (req, res) => {
 // start server on the specified port and binding host
 app.listen(config.port, '0.0.0.0', function() {
   console.log("Conversation Broker Service v0.0.5 09/26/2017 starting on " + config.port);
+  console.log("  Use your web browser: http://localhost:"+config.port);
 });

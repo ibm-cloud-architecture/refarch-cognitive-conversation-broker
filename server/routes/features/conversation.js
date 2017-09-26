@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 const watson = require('watson-developer-cloud');
+const bpmoc  = require('./supplier-bpm-client');
+const persist= require('./persist');
 
 module.exports = {
   /**

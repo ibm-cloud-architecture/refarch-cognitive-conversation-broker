@@ -24,7 +24,7 @@ deployed application.
 ATTENTION this code is not generic and the SOAP message depends on the exposed
 web service definition of the process application deployed on BPM on Cloud
 */
-exports.module ={
+module.exports ={
   callBPMSupplierProcess : function(config,company,product) {
       var xmlBody = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://SOBD/SOAPStart.tws">'+
          '<soapenv:Header/>'+

@@ -2,7 +2,11 @@
 This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app, or micro service or even a business process running on [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud). It is implemented as a micro service, using resiliency and light weight implementation, packaging and deployment model.
 
 This project is part of the **IBM Cognitive Reference Architecture** compute model available at https://github.com/ibm-cloud-architecture/refarch-cognitive.
+# Table of Contents
+* [Introduction](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#introduction)
 
+
+# Introduction
 The Implementation addresses multiple facets:
 * The broker code to facade Watson Conversation and support service orchestration like persistence to document oriented database, supporting multiple Conversation workspace
 * The Watson Conversation content in a form of a [workspace](wcs-workspace/ITsupport-workspace.json) to support 'IT Support' help: this is a common pattern of using a chat bot to address a lot of standard queries end users may have about IT applications or hardware, and a second workspace to support conversation inside a BPM coach to ask for help in the context of a process ([Supplier on boarding help](wcs-workspace/ITsupport-workspace.json)).
