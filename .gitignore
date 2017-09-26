@@ -4,10 +4,12 @@
 /dist
 /tmp
 
-server/routes/env.json
 
 # dependencies
 /node_modules
+
+# helm
+chart/casewcsbroker*.tgz
 
 # IDEs and editors
 /.idea
