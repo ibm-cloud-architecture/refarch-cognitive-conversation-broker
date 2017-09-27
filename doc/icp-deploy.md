@@ -52,16 +52,75 @@ imagePullSecrets:
 ### Chart.yaml
 Set the version and name it will be use in deployment.yaml. Each time you deploy a new version of your app you can just change the version number. The values in the Chart.yaml are used in the templates.
 
+### Add configMap templates
+The config.json is a file that can be used when deploying on bluemix or locally, but when running on container within kubernetes it is good practice to externalize application configuration in config map. To do so we need to create a new template **templates/configmap.yaml**. This file uses the same structure as the config.json file but externalizes to get the parameter values from the values.yaml so developer can changes only one file to control the configuration.
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+data:
+  config.json: |+
+    {
+        "conversation" :{
+          "version" : "{{ .Values.config.conversation.version }}",
+          "versionDate": "{{ .Values.config.conversation.versionDate }}",
+          "username": "{{ .Values.config.conversation.username }}",
+          "password": "{{ .Values.config.conversation.password }}",
+          "workspace1":"{{ .Values.config.conversation.workspace1 }}",
+          "conversationId": "{{ .Values.config.conversation.conversationId }}",
+          "usePersistence": "{{ .Values.config.conversation.usePersistence }}"
+        },
+
+```
+### Modify deployment.yaml
+The configuation file can be overloaded by using the create content from the k8s config map. To do so we need to define a Volume to mount to the config.json file in the deployment.yaml as the following:
+```yaml
+volumeMounts:
+- name: config
+  mountPath: /wcsbroker/server/config.json
+  subPath: config.json
+```
+the path */wcsbroker* comes from the dockerfile, working directory declaration. The volume name is arbitrary but needs to match a volume declared in the deployment.yaml. For example the volume is declared as config and use a configMap named template name of the helm package. See the paragraph above for the configmap.
+
+```yaml      
+volumes:
+      - name: config
+        configMap:
+          name:  {{ template "fullname" . }}
+```
+
 ### values.yaml
 Specify in this file the docker image name and tag
 ```yaml
-image:
-  repository: mycluster:8500/default/casewcsbroker
+iimage:
+  repository: master.cfc:8500/default/casewcsbroker
   tag: v0.0.1
   pullPolicy: IfNotPresent
+service:
+  name: casewcsbroker
+  type: ClusterIP
+  externalPort: 3001
+  internalPort: 3001
 ```
 
 Try to align the number of helm package with docker image tag.
+
+Finally declare the config values to point to the conversation parameters:
+```yaml
+config:
+  conversation:
+    version : v1
+    versionDate: 2017-02-03
+    username: 291d9e533...
+    password: aDFBlD...
+    workspace1: 1a3bfc1...
+    conversationId: ITSupportConversation
+    usePersistence: false
+```
 
 ## Build the application package with helm
 ```
@@ -78,7 +137,7 @@ There are multiple ways to upload the app to ICP using helm. We can use a privat
 The steps look like:
 * copy the tfgz file to the repository. ( is a HTTP server running in our data center)
 ```
-$ scp casewebportal-0.0.1.tgz boyerje@9.19.34.117:/storage/CASE/refarch-privatecloud
+$ scp casewcsbroker-0.0.1.tgz boyerje@9.19.34.117:/storage/CASE/refarch-privatecloud
 ```
 * If you want to have you to update your private catalog, you need to modify the index.yaml file.  The index file describe how your applications is listed in the ICP Application Center:
 ```

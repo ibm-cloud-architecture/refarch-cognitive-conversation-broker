@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+data:
+  config.json: |+
+    {
+        "conversation" :{
+          "version" : "{{ .Values.config.conversation.version }}",
+          "versionDate": "{{ .Values.config.conversation.versionDate }}",
+          "username": "{{ .Values.config.conversation.username }}",
+          "password": "{{ .Values.config.conversation.password }}",
+          "workspace1":"{{ .Values.config.conversation.workspace1 }}",
+          "conversationId": "{{ .Values.config.conversation.conversationId }}",
+          "usePersistence": "{{ .Values.config.conversation.usePersistence }}"
+        },
+        "bpmoc" :{
+          "serverName": "{{ .Values.config.bpmoc.serverName }}",
+          "processName": "{{ .Values.config.bpmoc.processName }}",
+          "basicAuth": "{{ .Values.config.bpmoc.basicAuth }}"
+        },
+        "dbCredentials" : {
+           "url": "{{ .Values.config.dbCredentials.url }}"
+        },
+        "debug": "{{ .Values.config.debug }}",
+        "port": "{{ .Values.config.port }}"
+    }

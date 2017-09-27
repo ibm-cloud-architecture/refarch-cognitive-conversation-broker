@@ -17,13 +17,13 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
-        livenessProbe:
-          httpGet:
-            path: /
-            port: {{ .Values.service.internalPort }}
-        readinessProbe:
-          httpGet:
-            path: /
-            port: {{ .Values.service.internalPort }}
+        volumeMounts:
+        - name: config
+          mountPath: /wcsbroker/server/config.json
+          subPath: config.json
         resources:
 {{ toYaml .Values.resources | indent 10 }}
+    volumes:
+      - name: config
+        configMap:
+          name:  {{ template "fullname" . }}
