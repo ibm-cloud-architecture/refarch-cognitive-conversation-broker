@@ -15,7 +15,8 @@
     "ng": "ng",
     "start": "node server/server",
     "dev": "concurrently \"ng build\" \"nodemon server/server\"",
-    "build": "ng build"
+    "build": "ng build",
+    "test" : "mocha"
   },
   "private": true,
   "dependencies": {
@@ -53,8 +54,9 @@
     "typescript": "~2.3.3",
     "@types/node": "~6.0.60",
     "@types/jasmine": "2.5.38",
+    "chai": "^4.0.0",
+    "mocha": "^3.4.2",
     "concurrently": "^3.5.0",
-    "mocha": "^3.4.1",
     "nodemon": "^1.11.0"
   }
 }

@@ -1,8 +1,11 @@
 # Deploy Conversation Broker to IBM Cloud Private
 We propose to package the code as a docker image, build a helm chart and then publish it to an ICP instance.
 
+## Pre-requisites
+If you do not have an ICP installed you can use the following [note](https://github.com/ibm-cloud-architecture/refarch-cognitive/blob/master/doc/install-dev-icp21.md) to do a 'developer' installation of ICP Community Edition.
+
 ## Build
-This project includes a docker file to build a docker image of the broker microservice. You can build the image to your local repository using the command:
+This project includes a docker file to build a docker image of the broker micro-service. You can build the image to your local repository using the command:
 ```
 # first build the App
 $ npm build

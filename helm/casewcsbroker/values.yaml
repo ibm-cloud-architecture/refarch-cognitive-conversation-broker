@@ -2,10 +2,14 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 replicaCount: 1
+revisionHistoryLimit: 1
 image:
-  repository: master.cfc:8500/default/casewcsbroker
+  repository: mycluster.cfc:8500/default/casewcsbroker
   tag: v0.0.1
   pullPolicy: IfNotPresent
+livenessProbe:
+  initialDelaySeconds: 40
+  periodSeconds: 2
 service:
   name: casewcsbroker
   type: ClusterIP

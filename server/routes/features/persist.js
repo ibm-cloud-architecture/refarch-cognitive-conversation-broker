@@ -18,12 +18,12 @@ This module perists the conversation content to a cloudant DB. It implements the
 Author: IBM - Jerome Boyer
 */
 
-var config = require('../env.json');
-const cloudant = require('cloudant')(config.dbCredentials.url);
-var db = cloudant.use('wcsdb');
+
 
 module.exports=  {
-  saveConversation : function(conv,next){
+  saveConversation : function(config,conv,next){
+    var cloudant = require('cloudant')(config.dbCredentials.url);
+    var db = cloudant.use('wcsdb');
     if (conv.context !== undefined) {
       if (conv.context.revId !== undefined) {
         conv._id=conv.context.persistId;

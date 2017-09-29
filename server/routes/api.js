@@ -23,6 +23,9 @@ module.exports = function(app,config) {
   app.get('/', (req, res) => {
     res.send('API supported: GET /api; POST /api/conversation; ');
   });
+  app.get('/healthz',(req,res) => {
+    res.send('UP and running');
+  });
   // Support REST call
   app.post('/api/conversation',function(req,res){
       if(!req.body){

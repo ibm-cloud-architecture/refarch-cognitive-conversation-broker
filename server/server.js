@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // Set specific api routes
-var config = require('./config.json');
+var config = require('./config/config.json');
 require('./routes/api')(app,config);
 
 // Catch all other routes and return the index file
@@ -39,7 +39,8 @@ app.get('*', (req, res) => {
 
 
 // start server on the specified port and binding host
-app.listen(config.port, '0.0.0.0', function() {
-  console.log("Conversation Broker Service v0.0.5 09/26/2017 starting on " + config.port);
-  console.log("  Use your web browser: http://localhost:"+config.port);
+const port = process.env.PORT || config.port;
+app.listen(port, '0.0.0.0', function() {
+  console.log("Conversation Broker Service "+ config.version+" starting on " + port);
+  console.log("  Use your web browser: http://localhost:"+port);
 });

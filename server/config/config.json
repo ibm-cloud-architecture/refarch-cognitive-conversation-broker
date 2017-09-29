@@ -19,5 +19,6 @@
       "url": "https://01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix:cd68d33a28d499bc6211810a56a0b99393a699190630f7811c438149be944500@01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix.cloudant.com"
     },
     "debug":true,
-    "port": 8080
+    "port": 3001,
+    "version": "v0.0.5"
 }

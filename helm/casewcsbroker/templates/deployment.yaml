@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: extension/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
@@ -6,6 +6,7 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   template:
     metadata:
       labels:
@@ -15,6 +16,12 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.service.servicePort }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds}}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds}}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         volumeMounts:
@@ -23,7 +30,7 @@ spec:
           subPath: config.json
         resources:
 {{ toYaml .Values.resources | indent 10 }}
-    volumes:
+      volumes:
       - name: config
         configMap:
           name:  {{ template "fullname" . }}

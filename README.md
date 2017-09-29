@@ -4,21 +4,23 @@ This project offers a set of simple APIs in front of Watson Conversation to be c
 This project is part of the **IBM Cognitive Reference Architecture** compute model available at https://github.com/ibm-cloud-architecture/refarch-cognitive.
 # Table of Contents
 * [Introduction](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#introduction)
-
+* [Knowledge](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#expected-knowledge)
+* [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
+* [Code explanation](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#code-explanation)
 
 # Introduction
-The Implementation addresses multiple facets:
-* The broker code to facade Watson Conversation and support service orchestration like persistence to document oriented database, supporting multiple Conversation workspace
-* The Watson Conversation content in a form of a [workspace](wcs-workspace/ITsupport-workspace.json) to support 'IT Support' help: this is a common pattern of using a chat bot to address a lot of standard queries end users may have about IT applications or hardware, and a second workspace to support conversation inside a BPM coach to ask for help in the context of a process ([Supplier on boarding help](wcs-workspace/ITsupport-workspace.json)).
+This implementation addresses multiple facets for developing a cloud native cognitive app:
+* How to facade Watson Conversation to support service orchestration, persistence, conversations chaining... and any business logic needed to support an integrated hybrid chat bot.
+* How to implement an 'IT Support' chat bot with Watson Conversation, with an exported [workspace](wcs-workspace/ITsupport-workspace.json). This is a common business requirement to use chat bot to address internal staff queries about IT applications or hardware. A second workspace is also delivered to support conversation inside a BPM coach to ask for help in the context of a process ([Supplier on boarding help](wcs-workspace/ITsupport-workspace.json)).
 * A complete set of aspects to support production deployment like logging, monitoring, resiliency, security.
 
-The project includes an [angular 2](http://angular.io) web application to illustrate a simple conversation chat which itself uses the broker APIs. The project is designed as a micro service, deployable as a containerized application on [IBM Bluemix](http://www.bluemix.net) [Kubernetes](https://www.ibm.com/blogs/bluemix/2017/03/kubernetes-now-available-ibm-bluemix-container-service/) Cluster. The concept of broker is presented in the [IBM Cognitive Reference Architecture for Conversation](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain), specially illustrated in the figure below:
+The project includes an [angular js](http://angular.io) web application to illustrate a simple conversation chat user interface which itself uses the broker APIs. The project is designed as a micro service, deployable as a containerized application on [IBM Bluemix](http://www.bluemix.net) [Kubernetes](https://www.ibm.com/blogs/bluemix/2017/03/kubernetes-now-available-ibm-bluemix-container-service/) Cluster. The concept of broker is presented in the [IBM Cognitive Reference Architecture for Conversation](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain), specially illustrated as 'Conversation Logic' in the figure below:
 
-![WCS Reference Architecture](doc/readme/WCS-ra.png) as the 'Conversation Application' icon.
+![WCS Reference Architecture](doc/readme/WCS-ra.png)
 
 ## Current Version
-The current version is used for IBM internal [training](./doc/tutorial/README.md) and demonstration: it is functional and supports the current features:
-* User interface is done with [Angular 2](angular.io) and support a simple  input field to enter questions to Watson and get a chat type of user experience. There are two interface versions: one with tutorial and one without.
+The current version is used for IBM internal [training](./doc/tutorial/README.md) and demonstration: it is functional and supports the following features:
+* User interface is done with [Angular js](angular.io) and support a simple  input field to enter questions to Watson and get a chat type of user experience. There are two interface versions: one with tutorial and one without.
 * The supported questions depend on the Intents defined in Watson Conversation. Two proposed Watson Conversation workspaces are available under the folder [wcs-workspace](./wcs-workspace) as JSON files:
   * one to support the CASE Inc IT support chat bot solution.
   * one to support the supplier on boarding business process contextual help.
@@ -29,12 +31,13 @@ The current version is used for IBM internal [training](./doc/tutorial/README.md
 You may fork this project for your own purpose and develop on top of it. If you want to contribute please submit a pull request on this repository, see [rule of contribution](https://github.com/ibm-cloud-architecture/refarch-cognitive#contribute)
 
 
-## Expected knowledge
-From the expected [common](https://github.com/ibm-cloud-architecture/refarch-cognitive#Expected-skill-set) skill set defined for *cyan compute* the reader needs to get some good understanding of the following concepts:
+# Expected knowledge
+On top of the [common](https://github.com/ibm-cloud-architecture/refarch-cognitive#Expected-skill-set) skill set defined for *cyan compute* the reader needs to get some good understanding of the following concepts:
 * For production deployment: circuit breaker, cascading failure, so the conversation broker code is using [Hystrix js](https://www.npmjs.com/package/hystrixjs) as an implementation model.
 * Know how to design a Watson Conversation, if not familiar doing the attached [step by step tutorial](./doc/tutorial/README.md) should help you  developing the Watson Conversation workspace with intent, entities definition and conversation flow needed for the IT support demonstration.
+* The following [article](doc/persistence.md) addresses how to persist the conversation in Cloud based document database like Cloudant or an on-premise database.
 
-## Prerequisites
+# Prerequisites
 
 * You need your own github.com account
 * You need to have a Bluemix account, and know how to use cloud foundry command line interface to push the application to Bluemix.
@@ -49,16 +52,17 @@ npm install
 * You need to install Angular 2 command line interface [cli.angular.io](http://cli.angular.io) tool ``` sudo  npm install -g @angular/cli``` on Mac for example.
 * You need to install [nodemon](https://nodemon.io/) with ``` sudo npm install -g nodemo```
 
-# Demonstration script
-If you want to see the conversation working go to the [deployed app](http://refarch-wcs-broker.mybluemix.net/) and run the following [demonstration script](doc/demo/demoscript.md).
 
 # Code explanation  
 The project is split into two parts: the client side that is an Angular 2 single page application (code under client folder) and the server which is an expressjs app with code under folder:
 ![Component view](doc/readme/angular2-comps.png)
 
+## Demonstration script
+If you want to see the conversation working go to the [deployed app](http://refarch-wcs-broker.mybluemix.net/) and run the following [demonstration script](doc/demo/demoscript.md).
+
 ## Server side
 The code is under the *server/* folder. The server.js is the main javascript entry point code, started when the *npm start* command is executed.
-The server uses *expressjs*, serves a index.html page for the angular2 front end, and delegates to another javascript module any HTTP calls to url starting with **/api/***.  
+The server uses *expressjs*, serves a index.html page for the angular front end, and delegates to another javascript module (routes/api.js) any HTTP calls to url starting with **/api/***.  
 Expressjs is a routing and middleware web framework used to simplify web server implementation in nodejs. An app is a series of middleware function calls. [See expressjs.com](http://expressjs.com/en/guide/using-middleware.html) for more details.
 The cfenv is used to deploy the application in Bluemix as a cloud foundry application.
 
@@ -66,9 +70,8 @@ The cfenv is used to deploy the application in Bluemix as a cloud foundry applic
 const express = require('express');
 const app = express();
 
-const api = require('./routes/api');
-// Set our api routes
-app.use('/api', api);
+var config = require('./config/config.json');
+require('./routes/api')(app,config)
 
 / Catch all other routes and return the index file
 app.get('*', (req, res) => {
@@ -78,9 +81,9 @@ app.get('*', (req, res) => {
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 /**
- * Get port from environment and store in Express.
+ * Get port from environment or local config parameters.
  */
-const port =appEnv.port || '3000';
+const port = process.env.PORT || config.port;
 ..
 
 ```
@@ -93,18 +96,7 @@ This code needs to be improved with authentication and authorization controls.
 The package.json file specifies the minimum dependencies for the server and client codes. The interesting dependencies is the watson-developer-cloud module needed to interact with any on cloude Watson service.
 ```
 "dependencies": {
-  "@angular/common": "^2.4.0",
-  "@angular/compiler": "^2.4.0",
-  "@angular/core": "^2.4.0",
-  "@angular/forms": "^2.4.0",
-  "@angular/http": "^2.4.0",
-  "@angular/platform-browser": "^2.4.0",
-  "@angular/platform-browser-dynamic": "^2.4.0",
-  "@angular/router": "^3.4.0",
-  "core-js": "^2.4.1",
-  "rxjs": "^5.1.0",
-  "zone.js": "^0.7.6",
-  "cfenv": "^1.0.x",
+  ...
   "body-parser": "^1.15.0",
   "cookie-parser": "^1.4.1",
   "express": "^4.13.x",
@@ -113,57 +105,62 @@ The package.json file specifies the minimum dependencies for the server and clie
   "watson-developer-cloud": "^2.x",
 ```
 
-The [api.js](./server/routes/api.js) defines the URL to be used by *angular 2* AJAX calls. Most of the user interactions in the Browser are supported by Angular 2, with its own Router mechanism and with its DOM rendering capabilities via directives and components. When there is a need to send data to the server for calling one of the Cognitive Service, an AJAX calls is done and the server will respond asynchronously later.
+The [api.js](./server/routes/api.js) defines the URLs to be used by *angular 2* AJAX calls. The user interactions in the Browser are supported by Angular 2, with its own Router mechanism and with its DOM rendering capabilities via directives and components. When there is a need to send data to the server for calling one of the Cognitive Service, an AJAX calls is done and the server will respond asynchronously later.
 
 *api.js* uses the [express.js](http://https://expressjs.com) middleware router to handle URL mapping.
 
 ```javascript
-const express = require('express');
-const router = express.Router();
-const router = express.Router();
+module.exports = function(app,config) {
 
 // Support REST call
-router.post('/conversation',function(req,res){
+app.post('/api/conversation',function(req,res){
     if(!req.body){
       res.status(400).send({error:'no post body'});
     } else {
-      if (req.body.context.type == "sodb") {
-        sobdConversation(req,res);
+      if (req.body.context.type !== undefined && req.body.context.type == "sodb") {
+        conversation.sobdConversation(config,req,res);
       } else {
-        itSupportConversation(req,res);
+        conversation.itSupportConversation(config,req,res);
       }
     }
 });
-
+}
 ```
 
-On the HTTP POST to /api/conversation the text is in the request body, and can be sent to Watson conversation. The code here is illustrating how to support different conversations from the user interface: for demonstration purpose the base interface is using the IT support conversation, but there is a second conversation for the Supplier on boarding business process (sodb) to use, so a second interface is used, and the context.type variable will help to understand what conversation is called.
+On the HTTP POST to /api/conversation the text is in the request body, and can be sent to Watson conversation. The code here is illustrating how to support different conversations from the user interface: for demonstration purpose the base interface is using the IT support conversation, but there is a second conversation for the Supplier on boarding business process (sobd) to use, so a second interface is used, and the context.type variable will help to understand what conversation is called.
 
 The second piece of interesting code is the Watson Conversation Broker under routes/features/conversation.js
 
-This code is straight forward, it loads configuration from the env.json file then uses it to interact with Watson cloud developer javascript APIs.
+This code is straight forward, it uses the configuration given as parameter then interacts with Watson cloud developer javascript APIs.
 
 ```javascript
-   const config = require('../env.json');
-   const conversation = watson.conversation({
-     username: config.conversation.username,
-     password: config.conversation.password,
-     version: 'v1',
-     version_date: config.conversation.version
-   });
-
+module.exports = {
   /**
-  Submit the user's response or first query to Watson Conversation.
+  Specific logic for the conversation related to IT support. From the response the
+  code could dispatch to BPM.
+  It persists the conversation to remote cloudant DB
   */
-  exports.submitITSupport = function(message,next) {
-        sendMessage(message,config.conversation.workspace1,next);
-  }
+   itSupportConversation : function(config,req,res) {
+        // this logic applies when the response is expected to be a value to be added to a context variable
+        // the context variable name was set by the conversation dialog
+        if (req.body.context.action === "getVar") {
+            req.body.context[req.body.context.varname] = req.body.text;
+        }
+        sendMessage(config,req,config.conversation.workspace1,res,processITSupportResponse);
+  }, // itSupportConversation
+}
+var sendMessage = function(config,req,wkid,res,next){
+  conversation = watson.conversation({
+          username: config.conversation.username,
+          password: config.conversation.password,
+          version: config.conversation.version,
+          version_date: config.conversation.versionDate});
 
-  exports.submitSODBHelp = function(message,next) {
-        sendMessage(message,config.conversation.workspace2,next);
-  }
+  conversation.message(...);
+}
 ```
-The two exposed functions are used to separate the call to conversation different workspace. Remember a Watson Conversation service can have one to many workspaces. The settings are externalized in the env.json file.
+
+The two exposed functions are used to separate the call to the different Watson Conversation workspace. Remember a Watson Conversation service can have one to many workspaces. The settings are externalized in the config/config.json file.
 ```
 "conversation" :{
   "version":"2017-02-03",
@@ -175,33 +172,12 @@ The two exposed functions are used to separate the call to conversation differen
   "usePersistence": true
 },
 ```
-Finally the last method is to send the text and conversation context to Watson Conversation. One of the important element is the workspace id that will help the service to route the message to the got conversation.
-
-```javascript
-var sendMessage = function(message,wkid,next){
-  if (config.debug) {console.log(">>> "+JSON.stringify(message,null,2));}
-  if (message.context.conversation_id === undefined) {
-      message.context["conversation_id"]=config.conversation.conversationId;
-  }
-  conversation.message({
-      workspace_id: wkid,
-      input: {'text': message.text},
-      context: message.context
-    },  function(err, response) {
-        if (err)
-          console.log('error:', err);
-        else {
-          next(response);
-        }
-
-    });
-}
-```
+Finally the last method is to send the text and conversation context to Watson Conversation.
 
 As the conversation holds a context object to keep information between different interactions, the code specifies a set of needed attributes: input, context and workspace ID which can be found in the Watson Conversation Service. If the context is empty from the first query, the conversationId is added. See [Watson Conversation API](https://www.ibm.com/watson/developercloud/conversation/api/v1/) for information about the context.
 
 ### Service orchestration
-A broker code is doing service orchestration. There are two examples illustrated in the `api.js` code in the the `var itSupportConversation = function(req,res)` function and in the callback method called when Watson conversation return a response `conversation.submitITSupport(req.body, function(response) `:  
+A broker code is doing service orchestration. There are two examples illustrated in the `conversation.js` code via the **next** function given as parameter to sendMessage. For example if the dialog flow adds an **action** variable in the context then the code can test on it and call a remote service.
 
 ```javascript  
 ...
@@ -215,8 +191,8 @@ A broker code is doing service orchestration. There are two examples illustrated
 See this [note](doc/integrate-bpm.md) for BPM integration detailed.
 For detail on the persistence done in Bluemix Cloudant see: [Peristence](doc/persistence.md)  
 
-## Angular 2 client app
-The code is under *client* folder. It was built using the Angular command line interface (`ng new <aname>``). The `ng` tool with the `new` command creates the foundation for a simple Angular 2 web app with the tooling to build and run a light server so the UI developer can work on the layout and screen flow without any backend. It is possible to use the angular 2 server and be able to develop and test the user interface using
+## Angular 4 client app
+The code is under *client* folder. It was built using the Angular command line interface (`ng new <aname>``). The `ng` tool with the `new` command creates the foundation for a simple Angular  web app with the tooling to build and run a light server so the UI developer can work on the layout and screen flow without any backend. It is possible to use the angular server and be able to develop and test the user interface using
 ```
 $ ng serve
 or
@@ -234,7 +210,7 @@ And then use the URL with the port number reported by the trace:
 [1] info: ** No persistent storage method specified! Data may be lost when process shuts down.
 [1] info: ** Setting up custom handlers for processing Slack messages
 [1] info: ** API CALL: https://slack.com/api/rtm.start
-[1] Server v0.0.1 starting on http://localhost:6012
+[1] Server v0.0.1 starting on http://localhost:3001
 ```
 
 ## Client code organization
@@ -374,10 +350,8 @@ As the call is asynchronous, we want the function to return a promise. To do so 
 The method declares the message and the context parameters. The context variable is here to keep the Watson conversation context so it can be sent back to the service so dialog context is kept. We need to propagate to the client as the conversation is with a unique client, where the server is serving multiple web browser.
 
 
-# Work on the code
-
 ## Link to your Watson Conversation service
-You need to create a Watson Conversation Service in IBM Bluemix, get the credential and update the file env-templ.json under server/routes folder with your own credential, then rename this file as env.json
+You need to create a Watson Conversation Service in IBM Bluemix, get the credential and update the file config/config.json with your own credential:
 ```
 {
     "conversation" :{
@@ -390,10 +364,10 @@ You need to create a Watson Conversation Service in IBM Bluemix, get the credent
     }
 }
 ```
-
+If you want to use persistence, you need to create a Cloudant Service and define the credential in the same file.
 
 ## Exposed REST APIs
-The exposed aPI is:
+The exposed API is:
  ```
 title: conversation-broker
 case:
@@ -405,25 +379,36 @@ case:
 
 The body should content at least the {text: message} json object. The context object is optional, it will be added with the Watson Conversation ID reference in the code on the first call to the service.
 
+
+# Build and Deploy
+
+## Build
 You can clone the repository, and uses the following commands:
 ```
 $ npm install
+# to compile the angular code
+$ ng build
+# to test the server with mocha
+$ npm test
 ```
+
 Execute locally
 ```
+# execute with a build of angular code and listen to server change
 $ npm run dev
+# execute the app without compilation
+$ npm start
 ```
 
-# Tutorial
-A detailed [tutorial](doc/tutorial.md) should help you build the Watson Conversation artifacts. The following [article](doc/persistence.md) addresses how to persist the conversation in Cloud based document database like Cloudant or an on-premise database.
-
-
-# Deploy to Bluemix
+## Deploy to Bluemix as Cloud Foundry
 To be able to deploy to bluemix, you need a bluemix account and the command line interface.  
-
+You can use the ```cf push <bluemix-app-name>```
+You can use also this one click button.
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker)
 
-You can use the ```cf push <bluemix-app-name>```
+
+## Deploy to IBM Cloud Private
+See the detailed [note here](doc/icp-deploy.md)
 
 # Contribute
 See the process in [main cognitive repository](https://github.com/ibm-cloud-architecture/refarch-cognitive).

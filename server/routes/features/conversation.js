@@ -76,7 +76,7 @@ var sendMessage = function(config,req,wkid,res,next){
           if (config.conversation.usePersistence) {
               response.context.persistId=req.body.context.persistId;
               response.context.revId=req.body.context.revId;
-              persist.saveConversation(response,function(persistRep){
+              persist.saveConversation(config,response,function(persistRep){
                     response.context.persistId=persistRep.id;
                     response.context.revId=persistRep.rev;
                     console.log("Conversation persisted, response is now: "+JSON.stringify(response,null,2));
