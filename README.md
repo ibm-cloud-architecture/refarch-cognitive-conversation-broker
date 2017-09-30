@@ -4,9 +4,12 @@ This project offers a set of simple APIs in front of Watson Conversation to be c
 This project is part of the **IBM Cognitive Reference Architecture** compute model available at https://github.com/ibm-cloud-architecture/refarch-cognitive.
 # Table of Contents
 * [Introduction](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#introduction)
-* [Knowledge](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#expected-knowledge)
-* [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
+* [Skill set](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#expected-knowledge)
+*
+* [tutorial](doc/tutorial/README.md) [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
 * [Code explanation](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#code-explanation)
+* [Build and Run](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#build-and-deploy)
+* [Compendium](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#compendium)
 
 # Introduction
 This implementation addresses multiple facets for developing a cloud native cognitive app:
@@ -385,7 +388,12 @@ The body should content at least the {text: message} json object. The context ob
 ## Build
 You can clone the repository, and uses the following commands:
 ```
+# Install all the dependencies defined in the package.json
 $ npm install
+# Install angular Command Line Interface for compiling code
+$ npm install -g @angular/cli
+# the previous commands are to prepare the environment
+
 # to compile the angular code
 $ ng build
 # to test the server with mocha
@@ -394,9 +402,11 @@ $ npm test
 
 Execute locally
 ```
-# execute with a build of angular code and listen to server change
+# execute with a build of angular code and start the server in monitoring mode,
+# so change to server restarts the server.
 $ npm run dev
-# execute the app without compilation
+
+# You can also execute the app without compilation and monitoring
 $ npm start
 ```
 
@@ -409,6 +419,9 @@ You can use also this one click button.
 
 ## Deploy to IBM Cloud Private
 See the detailed [note here](doc/icp-deploy.md)
+
+# Compendium
+
 
 # Contribute
 See the process in [main cognitive repository](https://github.com/ibm-cloud-architecture/refarch-cognitive).

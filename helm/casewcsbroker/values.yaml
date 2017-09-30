@@ -4,8 +4,8 @@
 replicaCount: 1
 revisionHistoryLimit: 1
 image:
-  repository: mycluster.cfc:8500/default/casewcsbroker
-  tag: v0.0.1
+  repository: jbcluster.icp:8500/default/casewcsbroker
+  tag: 0.0.1
   pullPolicy: IfNotPresent
 livenessProbe:
   initialDelaySeconds: 40

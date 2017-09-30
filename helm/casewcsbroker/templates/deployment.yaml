@@ -1,4 +1,4 @@
-apiVersion: extension/v1beta1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
@@ -19,7 +19,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz
-            port: {{ .Values.service.servicePort }}
+            port: {{ .Values.service.internalPort }}
           initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds}}
           periodSeconds: {{ .Values.livenessProbe.periodSeconds}}
         ports:
@@ -34,3 +34,11 @@ spec:
       - name: config
         configMap:
           name:  {{ template "fullname" . }}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      imagePullSecrets:
+        - name: admin.registrykey
+        - name: default-token-45n44
+      schedulerName: default-scheduler
