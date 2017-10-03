@@ -1,6 +1,7 @@
-# Watson Conversation Hands-on Tutorial
+# IT Support Chat bot Tutorial
 
-Implement a simple IT support help-me conversation chatbot. The chatbot helps to streamline IT support queries by automating the dialog flow.
+Implement a simple **IT support** help-me conversation chatbot. The chatbot helps to streamline IT support queries by automating the dialog flow.
+Updates: 10/03/2017
 
 ## Business use case
 The support director wants to modernize the way to support internal staff and offload his team from basic work. Currently 20000 tickets are issued in a year. 50% of the calls are answered in 7 minutes whereas there are many situations that reach up to 70 minutes for resolution. 92% of the calls are resolved by level 1 support. Employees of the Case Inc engage with customer support mostly through phones. Today, call center agents struggle to find some of the answers in a timely fashion as the systems are not integrated. This results in loss of productivity and frustration on the part of the bank employees. Level 1 support team get frustrated at times because of unavailability of the right information and proper guidance. The Level 1 support has to consult the Level 2 support team members to get some answers.   
@@ -8,18 +9,18 @@ The support director wants to modernize the way to support internal staff and of
 As presented in the [Watson Conversation reference architecture diagram](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture) this tutorial addresses the Ground Truth development with the conversation flow design (E) and the run time processing (4,7), integrated with chatbot interface (1), and controlled by the application logic - or **broker** micro service.
 ![Reference Architecture Diagram](wcs-ra.png)  
 
-## Table of content
-This tutorial was ported to the IBM Garage method tutorial at https://www.ibm.com/devops/method/tutorials/watson_conversation_support, you can execute the tasks from 1 to 7.
+## Table of Contents
+This tutorial was ported to the IBM Cloud Garage method tutorial web site at https://www.ibm.com/devops/method/tutorials/watson_conversation_support.
+In this tutorial, you complete the following tasks:
 
-At the end of this training you will be able to learn the following:  
-* [What is Watson Conversation (Quick Summary)](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#watson-conversation-quick-summary)
+* [What is Watson Conversation (Quick Summary)](#watson-conversation-quick-summary)
 * [Create Watson conversation service](https://www.ibm.com/devops/method/tutorials/watson_conversation_support?task=1) and [workspace](https://www.ibm.com/devops/method/tutorials/watson_conversation_support?task=2)
-* [Defining intent and entities to help natural language processing](https://www.ibm.com/devops/method/tutorials/watson_conversation_support?task=3)
+* [Defining intents to help natural language processing](https://www.ibm.com/devops/method/tutorials/watson_conversation_support?task=3)
+* [Unit test intents](https://www.ibm.com/devops/method/tutorials/watson_conversation_support?task=4)
+* [Add entities to improve language understanding](https://www.ibm.com/devops/method/tutorials/watson_conversation_support?task=5)
 * [Building simple dialog flow](https://www.ibm.com/devops/method/tutorials/watson_conversation_support?task=6)
 * [Using the context object for more advanced dialog](https://www.ibm.com/devops/method/tutorials/watson_conversation_support?task=7)
-* [Develop hierarchical flow ](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#a-hierarchical-dialog-flow)
-* [Use variable to get data from conversation](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#using-interaction-to-get-parameters-to-call-a-web-service)
-* [Using the api](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker/blob/master/doc/tutorial/README.md#task-8---using-api)
+* [Using the api](#task-8---using-api)
 
 
 # Watson Conversation Quick Summary
@@ -43,10 +44,7 @@ Finally, after you train your system to recognize intents and entities, you teac
 You should also read [Cognitive Conversation introduction](https://www.ibm.com/devops/method/content/architecture/cognitiveConversationDomain)
 
 # Hands on lab - Step by step
-As mentioned above the training was ported to the Garage Method [Tutorial section](https://www.ibm.com/devops/method/tutorials/watson_conversation_support) so you should follow the step by step instruction from this web site, but as new product capabilities were introduced since the last publish, we are specifying below some change to the tutorial that will stay here until they are ported to the tutorial.
-
-For beginners, please perform the tasks 1 to 6. Developers can do all the tasks.
-
+As mentioned above the training was ported to the Garage Method [Tutorial section](https://www.ibm.com/devops/method/tutorials/watson_conversation_support) so you should follow the step by step instruction from this web site, but as new product capabilities were introduced since the last publish, we are specifying below some change to the tutorial that will stay here until they are ported to the method web site.
 
 ## Task 1 - Create Conversation Service
 New screen shots:
@@ -55,37 +53,31 @@ New screen shots:
 ![](bmx-conv-tool.png)
 
 ## Task 2 - Creating a workspace
-
 New screen
-
 ![](wcs-conv-wksp.png)
 
 ## Task 3 - Creating intents
 
-New screen
+New screens
 
 ![Intents](wcs-build-intents.png)  
 
-
 ![Questions](wcs-intent-question.png)  
-
 
 ![goodbyes](goodbyes-intent.png)
 
-
 ![greetings](greetings.png)
-
 
 ## Task 4 - Intent Unit testing
 
-
+New screens
 ![Ask Watson](Ask-Watson.png)
 
 ![try it](tryitout.png)  
 
 
 ## Task 5 - Adding entities  
-
+New screens
 ![](wcs-entities-panel.png)
 
 ![entities](wcs-entities.png)
@@ -93,14 +85,14 @@ New screen
 ![Test entity](ut-app-abc.png)
 
 ## Task 6 - Building the dialog
-
+New screens
 ![Dialog](wcs-dialog.png)  
 
 ![](wcs-two-nodes.png)  
 
 ### Defining Greetings node
 
-The first node, named Welcome, which is executed when conversation starts. As we have defined the **#greeting** intent, your first node will be to do something when Watson Conversation classifies the user input to be a greeting. So select the `welcome` node and click to the `Add node below` menu choice:
+The first node, named Welcome, is executed when conversation starts. As we have defined the **#greeting** intent, you want to add a new node to do something when Watson Conversation classifies the user input to be a greeting. So select the `welcome` node and click to the `Add node below` menu choice:
 ![](Add-greetings.png)
 
 
@@ -135,33 +127,96 @@ The evaluation round works in two stages. In the first stage, the dialog tries t
 
 
 ## Task 7 - Advanced Dialog Work
+In this task the following is updated:
 
+### Adding variables to context
+Suppose you want to return an actionable URL, meaning that the response includes a URL variable that the user can click to go to a new page. To try this scenario, you will present the URL of a business process that is deployed on IBM BPM on Cloud.
 
-### Adding variable to context
 If you did not import the intents definition from the lab csv file, you need to add a new intent to support the user's query about accessing the "Supplier on boarding business process".
 ![Supplier on boarding](supplier-intent.png)  
 
-Add a new node to the dialog flow under the **Application access** node. Named it **Handling supplier on boarding**, specify the intent, **#SupploerOnBoarding** and then in the response  access the Advanced editor so we can edit the *json* response object:  
+Add a new node to the dialog flow under the **Application access** node. Named it **Handling supplier on boarding**, specify the intent, **#SupplierOnBoarding** and then in the response  access the Advanced editor so we can edit the *json* response object:  
 
 ![Supplier node](supplier-node.png)
 
+The response object includes an *output* object with the text to present and a *context* object. The *context* object has new variable named *url* to give IBM BPM on Cloud access and an *action* variable to control the behavior of the broker code. When the user enters a question like "I want to access the supplier on boarding business process,” the returned object looks like this example:
+```json
+{"intents": [
+     {
+       "intent": "supplieronboarding",
+       "confidence": 0.940047025680542
+     }
+   ],
+ "entities": [
+   {
+     "entity": "supplier",
+     "value": "supplier"
+    }
+   ],
+   "input": {
+      "text": " I want to access the supplier on boarding business process"
+   },
+   "output": {
+     "log_messages": [],
+     "text": [
+     "To access the Supplier On Boarding business process use the url: "
+     ],
+     "nodes_visited": [
+       "Supplier On Boarding",
+       "Provide URL for Supplier on boarding"
+     ]
+    },
+    "context": {
+       "conversation_id": "Conversation-ut",
+       "system": {
+         "dialog_stack": [
+         {
+           "dialog_node": "root"
+         }
+         ],
+         "dialog_turn_counter": 1,
+         "dialog_request_counter": 1
+         },
+         "url": "https://vhost001.bpm.ibmcloud.com/bpm/dev/ProcessPortal/dashboards/SYSRP/RESPONSIVE_WORK",
+         "action":"click"
+      }
+}
+```
+The code that calls the Watson Conversation API can take the URL value and create a hyperlink in HTML so that the display has an actionable link
+```javascript
+if (rep.context.url != undefined) {
+ if (rep.context.action === "click") {
+   rep.text=rep.output.text[0] + "<a class=\"btn btn-primary\" href=\""+rep.context.url+"\">Here</a>"
+ }
+}
+```
+The actionable link is shown in the last interaction, with the clickable button added to the message:
+![](click-url.png)  
+Much can be done on the context object. For example, the application code can add elements in the context object before it calls the Conversation service. Then, at the condition level in a node, tests can be done on those elements.
 
+To use a context variable in your condition, use one of these formats:
+```
+$variable_name:value
+$variable_name == 'value'
+```
+The value of the condition might have been set by the application or in the response portion of a previous dialog node. In the next test, the canAccessSOD context variable is a Boolean that is set by accessing an internal authorization service that, for example, returns true if a user ID can access an application.
 
-### Using slots.
+### Using slots
+This section replaces 'add a hierarchical flow'.
+
 In this section we will add a dialog flow to address when a user wants to bring his own device. We will support only certain brand and device. So we need to get those information. What we want to achieve could be illustrated by the following dialog:
 ![](byod-ut.png)
 From the first query: "I want to bring my phone", Watson Conversation was able to get the **#BYOD** intent and the entity **@deviceType:phone**, so the dialog flow ask the brand of the device. If the device type was not extracted it will have ask a question about the type of device the user wants to bring.
 
 A older way to support this different combination is to add a hierarchy of nodes and code the conditions on entity. Since the August release, there is the **slot** concept makes it more simple to implement. Use slots to get the information you need before you can respond accurately to the user.
 
-If you did not import the intent and entities before, create a new entity for bring your own device question, like illustrated below:
+1. If you did not import the intent and entities before, create a new entity for bring your own device question, like illustrated below:
 ![byod](byod.png)  
-and for the entities @deviceBrand and @deviceType:
-![device-brand](device-brand.png)  
+1. Create the entities @deviceBrand and @deviceType:
+  ![device-brand](device-brand.png)
 
-![device-type](device-type.png)  
-
-Now add a new flow, by adding a top level node, with the `#BYOD` intent as recognize condition/ Select the Customize menu on the right to enable slots for this node:
+  ![device-type](device-type.png)  
+1. Add a new flow, by adding a top level node, with the `#BYOD` intent as recognize condition/ Select the Customize menu on the right to enable slots for this node:
 ![](slot-enabled.png)
 
 Once done the condition part changes to **Then check for:**
@@ -179,6 +234,9 @@ For the response part you can use the advanced dialog to enter a output text to 
 Be sure to set to *wait for user input* in the *And then* action part.
 
 ### Using interaction to get parameters to call a web service
+The last example is more complex, but it represents a common pattern: in the context of a dialog flow, the set of interactions aim to gather input parameters so that after the interaction is done, the broker code can call a web service and pass the parameters as part of the payload.
+
+In this example, the BPM supplier onboarding process can be triggered via a SOAP call. There are two input parameters: the company name and the product name. The client code is in the conversation broker code as a feature in the server/routes/features/supplier-bpm-client.js file.
 
 As the focus is on the dialog, you must modify the previous flow to handle the 'Supplier process' intent. The first node asks whether the user wants the chatbot to trigger the process, as shown in this image:  
 ![](supplier-node.png)  
@@ -186,10 +244,13 @@ As the focus is on the dialog, you must modify the previous flow to handle the '
 When the response is no, you use the previous behavior by providing the URL to BPM Process portal so that the user can start the process manually.
 ![](supplier-node-no.png)
 
-When the response is yes, the child node uses slots to get the company name and product name:
+When the response is yes, the two next interactions are used to get the company name and product name. You can try to reproduce the following structure
+![](get-parameters.png)  
+
+Outside of the output.text which provides a question about the company, the context uses two variables to help driving the broker code: the action is set to getVar and the varname to the name of the variable to add to the context via code. The following figure illustrates that on a **yes** response the bot will ask about the supplier node.
 ![](supplier-node-yes.png)  
 
-Outside of the output.text which provides a question about the company, the context uses two variables to help driving the broker code: the action is set to getVar and the varname to the name of the variable to add to the context via code. The broker code dynamically adds the specified variable in the context to keep the data for the next interaction. The following code is in the function to manage the user's response before it calls the Conversation service:
+The broker code dynamically adds the specified variable in the context to keep the data for the next interaction. The following code is in the function to manage the user's response before it calls the Conversation service:
 
 ```javascript  
 if (req.body.context.action === "getVar") {
@@ -197,8 +258,17 @@ if (req.body.context.action === "getVar") {
   }
 ```
 
-The same approach is done in for the product name and once done the interaction set the action to **trigger**.
+The same approach is done in for the product name:
 
+![](get-product-name.png)
+
+If the user does not give the product or company name a specific node identify the missing parameter and goes back to the node to ask the question again.
+
+![](no-product-name.png)
+
+ Finally when all the parameters are set the interaction set the action to **trigger**, so the broke call can perform the soap call to the service.
+
+![](trigger-process.png)
 
 ## Task 8 - Using API
 To use API you need the service credential and use tool to preform HTTP request. See this separate [instructions](../use-apis.md).

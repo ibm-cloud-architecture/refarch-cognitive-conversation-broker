@@ -322,6 +322,7 @@ The response object includes an **output** object with the text to present and a
       "url": "https://vhost001.bpm.ibmcloud.com/bpm/dev/ProcessPortal/dashboards/SYSRP/RESPONSIVE_WORK",
       "action":"click"
   }
+}
 ```
 The code that calls the Watson Conversation API can take the url value and creates an hyperlink in html so the display have actionable link:
 ```javascript
