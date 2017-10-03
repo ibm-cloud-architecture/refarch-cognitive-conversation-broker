@@ -5,8 +5,8 @@ This project is part of the **IBM Cognitive Reference Architecture** compute mod
 # Table of Contents
 * [Introduction](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#introduction)
 * [Skill set](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#expected-knowledge)
-*
-* [tutorial](doc/tutorial/README.md) [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
+* [tutorial](doc/tutorial/README.md)
+* [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
 * [Code explanation](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#code-explanation)
 * [Build and Run](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#build-and-deploy)
 * [Compendium](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#compendium)
@@ -421,6 +421,9 @@ You can use also this one click button.
 See the detailed [note here](doc/icp-deploy.md)
 
 # Compendium
+
+* [Cognitive conversation paper](https://www.ibm.com/devops/method/content/architecture/cognitiveConversationDomain)
+* [Build dialog flow](https://console.bluemix.net/docs/services/conversation/dialog-build.html#dialog-build)
 
 
 # Contribute
