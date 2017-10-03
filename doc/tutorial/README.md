@@ -275,6 +275,9 @@ To use API you need the service credential and use tool to preform HTTP request.
 
 For understanding the **broker** code see [this section of the readme](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#code-explanation)
 
+## Final solution
+If you need to see the current solution, load the exported conversation workspace as json file into your Conversation tools. The file is under **./wcs-workspace/ITsupport-workspace.json**.
+
 ## Learn More
 * A super simple chat bot designed for customer service [here](https://www.ibm.com/blogs/watson/2016/12/build-chat-bot)
 * Watson Conversation simple [Product tutorial](https://www.ibm.com/watson/developercloud/doc/conversation/tutorial.html)
