@@ -262,7 +262,7 @@ The same approach is done in for the product name:
 
 ![](get-product-name.png)
 
-If the user does not give the product or company name a specific node identify the missing parameter and goes back to the node to ask the question again.
+During the dialog execution if the end user does not give the product or the company name, a specific node in the dialog flow identify the missing parameters and routes back the dialog flow to the node asking for the missing parameter. The figure below illustrates the 'Jump to...' constraint added to the node definition so the dialog flow goes back to the 'Get Product name' node.
 
 ![](no-product-name.png)
 
