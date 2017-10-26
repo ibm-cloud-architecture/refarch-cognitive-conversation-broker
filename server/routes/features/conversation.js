@@ -41,7 +41,37 @@ module.exports = {
           res.status(200).send(response);
         }
     });
-  }
+  },
+  advisor : function(config,req,res) {
+   if ( req.body.context !== undefined) {
+     req.body.context.action="";
+     req.body.context.predefinedResponses="";
+   }
+   sendMessage(config,req,config.conversation.workspace3,res,function(config,res,response) {
+       if (config.debug) {console.log(" Advisor <<< "+JSON.stringify(response,null,2));}
+       if (response.Error !== undefined) {
+         res.status(500).send({'text':response.Error});
+       } else {
+           response.text="<p>"+response.output.text[0]+"</p>";
+           /*
+           if (response.context.action !== undefined && response.context.action == "predefinedResponses") {
+             for (var sr in response.context.predefinedResponses) {
+               response.text=response.text+
+               "<br/><a class=\"btn btn-primary\" (click)=\"advisorResponse(\""
+               +response.context.predefinedResponses[sr]
+               +"\")>"
+               +response.context.predefinedResponses[sr]+"</a>"
+               console.log(response.text)
+             }
+           }
+           */
+           if (response.context.action === "click") {
+               response.text= response.text+ "<br/><a class=\"btn btn-primary\" href=\""+response.context.url+"\">"+response.context.buttonText+"</a>"
+           }
+         res.status(200).send(response);
+       }
+   });
+ }
 } // exports
 
 // ------------------------------------------------------------
@@ -104,6 +134,8 @@ var processITSupportResponse = function(config,res,response){
         } else if (response.context.action === "trigger"
              && response.context.actionName === "supplierOnBoardingProcess") {
                bpmoc.callBPMSupplierProcess(config,response.context.customerName,response.context.productName);
+        } else if (response.context.action == "predefinedResponses") {
+
         }
         res.status(200).send(response);
     }

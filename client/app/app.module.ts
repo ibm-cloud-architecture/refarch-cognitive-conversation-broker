@@ -8,11 +8,14 @@ import { AppComponent }         from './app.component';
 import { ConversationComponent} from './conv/conversation.component';
 import { ConversationService }  from './conv/conversation.service';
 import { HomeComponent }        from './home.component';
+import { AdvisorComponent}  from './advisor/advisor.component';
+import { AdvisorService }   from './advisor/advisor.service';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'conversation/:type', component: ConversationComponent },
+  { path: 'advisor', component: AdvisorComponent},
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ]
@@ -21,7 +24,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    ConversationComponent
+    ConversationComponent,
+    AdvisorComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,7 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ConversationService],
+  providers: [ConversationService,AdvisorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

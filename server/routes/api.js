@@ -38,5 +38,12 @@ module.exports = function(app,config) {
         }
       }
   });
+  app.post('/api/advisor',function(req,res){
+      if(!req.body){
+        res.status(400).send({error:'no post body'});
+      } else {
+          conversation.advisor(config,req,res);
+        }
+  });
 
 } // exports

@@ -7,8 +7,8 @@
       "workspace1":"1a3b01f3-4757-444d-a933-a1e648babfc1",
       "conversationId":"ITSupportConversation",
       "workspace2":"80b451cc-d4eb-43bf-a4ac-359599cd2405",
-      "workspace3":"80b451cc-d4eb-43bf-a4ac-359599cd2405",
-      "usePersistence": true
+      "workspace3":"6d779e17-922b-4e91-928d-4d63dfaf4ee6",
+      "usePersistence": false
     },
     "bpmoc" :{
       "serverName":"vhost001.bpm.ibmcloud.com",
@@ -20,5 +20,5 @@
     },
     "debug":true,
     "port": 3001,
-    "version": "v0.0.5"
+    "version": "v0.0.7"
 }

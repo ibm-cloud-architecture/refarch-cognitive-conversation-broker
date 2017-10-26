@@ -1,0 +1,52 @@
+.conversation-container {
+  border-style: solid;
+  max-width: 900px;
+  margin: 30px auto;
+  border-width : 2px;
+  border-radius: 8px;
+  border-color: #blue;
+}
+
+.scrolling-box {
+  padding: 0px 5px;
+  height: calc(100vh - 200px);
+  max-height: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.message-box {
+  margin: 20px 0px;
+  overflow: hidden;
+}
+
+.to-watson {
+    margin-left: 30%;
+}
+.to-watson-icon {
+  float: right;
+  font-size: 40px;
+}
+.to-watson-text {
+  padding: 0px 20px;
+  border-radius: 20px;
+  float: right;
+  background: #af4b08;
+  color:white;
+  max-width: calc(100% - 60px);
+}
+
+.from-watson {
+  max-width: 70%;
+}
+.from-watson-icon {
+  float: left;
+}
+.from-watson-text {
+  background: #3353d6;
+  padding: 15px 20px;
+  border-radius: 20px;
+  float: left;
+  color:white;
+  max-width: calc(100% - 60px);
+}

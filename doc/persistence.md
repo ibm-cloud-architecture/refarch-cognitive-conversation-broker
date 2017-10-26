@@ -14,7 +14,6 @@ To be able to persist on Bluemix Cloudant service you need to add such a service
 
 ## Bluemix Cloudant Integration
 
-
 The script on the server side is server/routes/features/persist.js. It uses the  javascript cloudant client library, define the database
 ```javascript
 var config = require('../env.json');

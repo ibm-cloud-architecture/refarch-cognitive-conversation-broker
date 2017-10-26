@@ -1,7 +1,7 @@
 # Deploy Conversation Broker to IBM Cloud Private
 We propose to package the code as a docker image, build a helm chart and then publish it to an ICP instance.
 
-## Pre-requisites
+## Prerequisites
 If you do not have an ICP installed you can use the following [note](https://github.com/ibm-cloud-architecture/refarch-cognitive/blob/master/doc/install-dev-icp21.md) to do a 'developer' installation of ICP Community Edition.
 
 ## Build
@@ -12,9 +12,9 @@ $ npm build
 $ docker build -t case/wcsbroker .
 $ docker images
 ```
-Then tag your local image with the name of the remote server where the docker registry resides, and the namespace to use. (*master.cfc:8500* is the remote server and *default* is the namespace)
+Then tag your local image with the name of the remote server where the docker registry resides, and the namespace to use. (*master.cfc:8500* is the remote server)
 ```
-$ docker tag case/webportal master.cfc:8500/default/casewcsbroker:0.0.1
+$ docker tag case/webportal master.cfc:8500/cyan/casewcsbroker:0.0.1
 $ docker images
 ```
 
@@ -54,7 +54,7 @@ imagePullSecrets:
 ```
 
 ### Chart.yaml
-Set the version and name it will be use in deployment.yaml. Each time you deploy a new version of your app you can just change the version number. The values in the Chart.yaml are used in the templates.
+Set the version and name attributes, they will be used in deployment.yaml. Each time you deploy a new version of your app you can just change the version number. The values in the Chart.yaml are used in the templates.
 
 ### Add configMap templates
 The config.json is a file that can be used when deploying on bluemix or locally, but when running on container within kubernetes it is good practice to externalize application configuration in config map. To do so we need to create a new template **templates/configmap.yaml**. This file uses the same structure as the config.json file but externalizes to get the parameter values from the values.yaml so developer can changes only one file to control the configuration.
@@ -81,7 +81,7 @@ data:
 
 ```
 ### Modify deployment.yaml
-The configuation file can be overloaded by using the create content from the k8s config map. To do so we need to define a Volume to mount to the config.json file in the deployment.yaml as the following:
+The configuration file can be overloaded by using the create content from the k8s config map. To do so we need to define a Volume to mount to the config.json file in the deployment.yaml as the following:
 ```yaml
 volumeMounts:
 - name: config

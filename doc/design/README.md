@@ -1,4 +1,28 @@
-# Applying Design Thinking
+# Design considerations
+When designing a chatbot, you need to assess the following requirements:
+* who are the end users of the bot?
+* what is the expected level of competency they will have to interact with the bot?
+* what kind of channel and interaction? channels being existing chat bot software, or develop a new one in web, and interactions meaning voice or text, and click predefined responses.
+* The need to have text to speech and speech to text
+* Is there need to present parallel information in separate part of the user interface to give more context to the conversation response, like a map, a graphic, explanation...
+* Do we need to know the location of the user?
+* Do we need to know the user's 'journey' inside the web site (click stream history?)
+* Do we need to leverage existing customer profile to drive conversation content?
+* Do we want to assess emotional analysis?
+* Is there any conversation switching requirement? (Switching to a human)
+* how the conversation is supposed to end?
+* What are the goals of the end users? They should be clearly assessed as they are source for intent definitions.
+* do we need to ask for 5 stars feedback at the end of the conversation
+* What are the expected metrics to gather?
+   The typical ones are:
+   * total number of sessions
+   * stars per sessions
+   * # of transfer to human
+   * # of turn per session
+   * # of misses: reaching no node in the dialog or the default one.
+
+
+## Applying Design Thinking
 When implementing a cognitive solution, we may want to apply the [Design Thinking](https://www.ibm.com/devops/method/content/think/practice_design_thinking/) methodology as it helps transforming a business improvement idea to concrete business application end users will use.  The principles of empathy with users, prototyping or Minimum Viable Product and tolerance for failure are applied as part of the method.
 The storyboarding is one of such Design Thinking practice, where personas’ challenges and pains are addressed via stories. When engaging with a project team the first main exercise is to gather the requirements around Cognitive system and the use of the potential new application. The following application can help to formalize those requirements [Innovation Workshop](http://iwapp.mybluemix.net/).  
 Empathy maps are developed.  First we need to gather is the list of Personas as presented in screen shot below:  

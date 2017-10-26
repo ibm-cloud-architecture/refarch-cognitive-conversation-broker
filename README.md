@@ -7,8 +7,9 @@ This project is part of the **IBM Cognitive Reference Architecture** compute mod
 * [Skill set](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#expected-knowledge)
 * [Tutorial](doc/tutorial/README.md)
 * [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
+* [Design considerations](./doc/design/README.md)
 * [Code explanation](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#code-explanation)
-* [Build and Run](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#build-and-deploy)
+* [Build and Deploy](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#build-and-deploy)
 * [Compendium](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#compendium)
 
 # Introduction
@@ -36,7 +37,6 @@ You may fork this project for your own purpose and develop on top of it. If you 
 
 # Expected knowledge
 On top of the [common](https://github.com/ibm-cloud-architecture/refarch-cognitive#Expected-skill-set) skill set defined for *cyan compute* the reader needs to get some good understanding of the following concepts:
-* For production deployment: circuit breaker, cascading failure, so the conversation broker code is using [Hystrix js](https://www.npmjs.com/package/hystrixjs) as an implementation model.
 * Know how to design a Watson Conversation, if not familiar doing the attached [step by step tutorial](./doc/tutorial/README.md) should help you  developing the Watson Conversation workspace with intent, entities definition and conversation flow needed for the IT support demonstration.
 * The following [article](doc/persistence.md) addresses how to persist the conversation in Cloud based document database like Cloudant or an on-premise database.
 
@@ -54,6 +54,7 @@ npm install
 ```
 * You need to install Angular 2 command line interface [cli.angular.io](http://cli.angular.io) tool ``` sudo  npm install -g @angular/cli``` on Mac for example.
 * You need to install [nodemon](https://nodemon.io/) with ``` sudo npm install -g nodemo```
+
 
 
 # Code explanation  
