@@ -5,8 +5,5 @@ build
 .gitignore
 Jenkinsfile
 README.md
-chart
-gradle
-gradlew
-gradlew.bat
+helm
 test

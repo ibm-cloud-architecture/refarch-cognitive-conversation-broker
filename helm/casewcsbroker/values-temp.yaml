@@ -1,0 +1,54 @@
+# Default values for casewcsbroker.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+revisionHistoryLimit: 1
+image:
+  repository: jbcluster.icp:8500/default/casewcsbroker
+  tag: 0.0.1
+  pullPolicy: IfNotPresent
+livenessProbe:
+  initialDelaySeconds: 40
+  periodSeconds: 2
+service:
+  name: casewcsbroker
+  type: ClusterIP
+  externalPort: 3001
+  internalPort: 3001
+ingress:
+  enabled: false
+  # Used to create Ingress record (should used with service.type: ClusterIP).
+  hosts:
+    - casewcsbroker.local
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+config:
+  conversation:
+    version : v1
+    versionDate: 2017-02-03
+    username: <>
+    password: <>
+    workspace1: 1a3b01f3-4757-444d-a933-a1e648babfc1
+    conversationId: ITSupportConversation
+    usePersistence: false
+  bpmoc:
+    serverName: vhost001.bpm.ibmcloud.com
+    processName: SOBD/SOAPStart.tws
+    basicAuth: <>
+  dbCredentials:
+    url:  https://01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix:....-bluemix.cloudant.com
+  debug: true
+  port: 3001
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
