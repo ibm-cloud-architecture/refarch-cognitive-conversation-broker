@@ -35,7 +35,9 @@ config:
     username: 291d9397-073f-46d9-b0d2-11b54e6ae533
     password: aDFBIIPYkQlD
     workspace1: 1a3b01f3-4757-444d-a933-a1e648babfc1
-    conversationId: ITSupportConversation
+    workspace2: 80b451cc-d4eb-43bf-a4ac-359599cd2405
+    workspace3: 6c5ba7ac-4925-4ab4-bbc6-03f05e539407
+    conversationId: CyanConversations
     usePersistence: false
   bpmoc:
     serverName: vhost001.bpm.ibmcloud.com
