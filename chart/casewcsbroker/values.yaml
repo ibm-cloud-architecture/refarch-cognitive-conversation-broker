@@ -4,22 +4,22 @@
 replicaCount: 1
 revisionHistoryLimit: 1
 image:
-  repository: jbcluster.icp:8500/default/casewcsbroker
-  tag: 0.0.1
-  pullPolicy: IfNotPresent
+  repository: vh-icp-21-master.icp:8500/cyancompute/wcsbroker
+  tag: v0.0.1
+  pullPolicy: Always
 livenessProbe:
   initialDelaySeconds: 40
-  periodSeconds: 2
+  periodSeconds: 10
 service:
-  name: casewcsbroker
+  name: wcsbrokersvc
   type: ClusterIP
   externalPort: 3001
   internalPort: 3001
 ingress:
-  enabled: false
+  enabled: true
   # Used to create Ingress record (should used with service.type: ClusterIP).
   hosts:
-    - casewcsbroker.local
+    - wcsbroker.cyan.case
   annotations:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"

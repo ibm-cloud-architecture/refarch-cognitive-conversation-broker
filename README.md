@@ -3,12 +3,12 @@ This project offers a set of simple APIs in front of Watson Conversation to be c
 
 This project is part of the **IBM Cognitive Reference Architecture** compute model available at https://github.com/ibm-cloud-architecture/refarch-cognitive.
 # Table of Contents
-* [Introduction](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#introduction)
+* [Introduction](#introduction)
 * [Skill set](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#expected-knowledge)
 * [Tutorial](doc/tutorial/README.md)
 * [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
 * [Design considerations](./doc/design/README.md)
-* [Code explanation](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#code-explanation)
+* [Code explanation](#code-explanation)
 * [Build and Deploy](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#build-and-deploy)
 * [Compendium](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#compendium)
 
@@ -28,6 +28,7 @@ The current version is used for IBM internal [training](./doc/tutorial/README.md
 * The supported questions depend on the Intents defined in Watson Conversation. Two proposed Watson Conversation workspaces are available under the folder [wcs-workspace](./wcs-workspace) as JSON files:
   * one to support the CASE Inc IT support chat bot solution.
   * one to support the supplier on boarding business process contextual help.
+  * one to advise user for migration to cloud.
 * Support the Backend for Front end pattern with a nodejs/ expressjs application which exposes a HTTP POST /api/conversation end point.
 * Support the integration to BPM on cloud by triggering a business process via SOAP request by getting customer name and product name from the conversation. See explanation [here](doc/integrate-bpm.md)
 * Support persisting the conversation inside a document oriented database like [Cloudand DB on bluemix](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db). See detail [here](doc/persistence.md)
@@ -192,11 +193,34 @@ A broker code is doing service orchestration. There are two examples illustrated
 
 ```  
 
-See this [note](doc/integrate-bpm.md) for BPM integration detailed.
-For detail on the persistence done in Bluemix Cloudant see: [Peristence](doc/persistence.md)  
+See this [note](doc/integrate-bpm.md) for BPM integration details.
+
+We can also persist the conversation flow inside a document oriented database, for detail consult[this note](doc/persistence.md)  
+
+### User interface controls
+A classical usage of the conversation is to propose a predefined set of answers the end user can select from. The user interface can propose a HTML button for each option. The 'Advisor' page is defining such UI controls:
+```html
+<div class="{{p.direction+'-text'}}">
+  <div [innerHTML]="p.text"></div>
+  <div *ngIf="p.options">
+    <div *ngFor="let c of p.options">
+        <br/>
+      <button type="button" (click)="advisorResponse(c)" class="btn btn-primary">{{c}}</button>
+    </div>
+  </div>
+</div>
+```
+The options are built in the controller `advisor.component.ts` using the response coming from the server:
+```
+  s.options=data.context.predefinedResponses;
+```
+
+The context is the Watson Conversation context object and the `predefinedResponses` is an attribute added by the Watson conversation dialog. The figure below illustrates this settings in one of the response:
+
+![](doc/define-responses.png)
 
 ## Angular 4 client app
-The code is under *client* folder. It was built using the Angular command line interface (`ng new <aname>``). The `ng` tool with the `new` command creates the foundation for a simple Angular  web app with the tooling to build and run a light server so the UI developer can work on the layout and screen flow without any backend. It is possible to use the angular server and be able to develop and test the user interface using
+The code is under *client* folder. It was built using the Angular command line interface (`ng new <aname>``). The `ng` tool with the `new` command creates the foundation for a simple Angular  web app with the tooling to build and run a light server so the UI developer can work on the layout and screen flow without any backend. It is possible to use the angular server and be able to develop and test the user interface using the command:
 ```
 $ ng serve
 or
@@ -419,7 +443,7 @@ You can use also this one click button.
 
 
 ## Deploy to IBM Cloud Private
-See the detailed [note here](doc/icp-deploy.md)
+See the detailed [note here](doc/icp/README.md)
 
 # Compendium
 

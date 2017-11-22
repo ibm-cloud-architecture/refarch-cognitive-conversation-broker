@@ -32,7 +32,8 @@ export class AdvisorComponent {
         s.direction="from-watson";
         s.text=data.text;
         s.options=data.context.predefinedResponses;
-        this.currentDialog.push(s)
+        this.currentDialog.push(s);
+        this.queryString="";
       },
       error => {
         return "Error occurs in conversation processing"
