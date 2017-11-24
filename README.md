@@ -392,7 +392,7 @@ You can clone the repository, and uses the following commands:
 # Install all the dependencies defined in the package.json
 $ npm install
 # Install angular Command Line Interface for compiling code
-$ npm install -g @angular/cli
+$ sudo npm install -g @angular/cli
 # the previous commands are to prepare the environment
 
 # to compile the angular code
