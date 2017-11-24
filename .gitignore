@@ -33,6 +33,8 @@ chart/casewcsbroker*.tgz
 npm-debug.log
 testem.log
 /typings
+/helm/casewcsbroker/values.yaml
+/server/config/config.json
 
 
 #System Files

@@ -1,0 +1,56 @@
+# Default values for casewcsbroker.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+revisionHistoryLimit: 1
+image:
+  repository: vh-icp-21-master.icp:8500/cyancompute/wcsbroker
+  tag: v0.0.1
+  pullPolicy: Always
+livenessProbe:
+  initialDelaySeconds: 40
+  periodSeconds: 10
+service:
+  name: wcsbrokersvc
+  type: ClusterIP
+  externalPort: 3001
+  internalPort: 3001
+ingress:
+  enabled: true
+  # Used to create Ingress record (should used with service.type: ClusterIP).
+  hosts:
+    - wcsbroker.cyan.case
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+config:
+  conversation:
+    version : v1
+    versionDate: 2017-02-03
+    username: 291d9397-073f-46d9-b0d2-11b54e6ae533
+    password: aDFBIIPYkQlD
+    workspace1: 1a3b01f3-4757-444d-a933-a1e648babfc1
+    workspace2: 80b451cc-d4eb-43bf-a4ac-359599cd2405
+    workspace3: 6c5ba7ac-4925-4ab4-bbc6-03f05e539407
+    conversationId: CyanConversations
+    usePersistence: false
+  bpmoc:
+    serverName: vhost001.bpm.ibmcloud.com
+    processName: SOBD/SOAPStart.tws
+    basicAuth: Y29nbml0aXZlYnBtZW1haWxAZ21haWwuY29tOmNvZ25pdGl2ZQ==
+  dbCredentials:
+    url:  https://01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix:cd68d33a28d499bc6211810a56a0b99393a699190630f7811c438149be944500@01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix.cloudant.com
+  debug: true
+  port: 3001
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

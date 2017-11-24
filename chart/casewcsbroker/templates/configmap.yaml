@@ -13,6 +13,8 @@ data:
           "username": "{{ .Values.config.conversation.username }}",
           "password": "{{ .Values.config.conversation.password }}",
           "workspace1":"{{ .Values.config.conversation.workspace1 }}",
+          "workspace2":"{{ .Values.config.conversation.workspace2 }}",
+          "workspace3":"{{ .Values.config.conversation.workspace3 }}",
           "conversationId": "{{ .Values.config.conversation.conversationId }}",
           "usePersistence": "{{ .Values.config.conversation.usePersistence }}"
         },
