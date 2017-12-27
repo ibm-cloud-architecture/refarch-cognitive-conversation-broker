@@ -16,7 +16,7 @@
     "start": "node server/server",
     "dev": "concurrently \"ng build\" \"nodemon server/server\"",
     "build": "ng build",
-    "test" : "mocha"
+    "test": "mocha"
   },
   "private": true,
   "dependencies": {
