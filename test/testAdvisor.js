@@ -51,11 +51,17 @@ var handleITteam = function(response) {
       })
 } // own IT
 
+var handleWASND = function(response) {
+      processResponse(response, function(repp) {
+        assert.equal(repp.intents[0].intent,"wasapp");
+        sendMessage("Your IT team",repp.context,callback);
+      })
+} // own IT
 
 var handleWASapp = function(response) {
       processResponse(response, function(repp) {
         assert.equal(repp.intents[0].intent,"wasapp");
-        sendMessage("Your IT team",repp.context,handleITteam);
+        sendMessage("yes",repp.context,handleWASND);
       })
 } // WAS app
 
@@ -75,10 +81,11 @@ var handleMigrateToCloud = function(response){
 }; // migrate to the cloud
 
 
+// send migration to the cloud
 var handleGreeting = function(response) {
   processResponse(response, function(repp) {
     assert.equal(repp.intents[0].intent,"Greetings")
-    sendMessage("migrate to the cloud",repp.context,handleMigrateToCloud);
+    sendMessage("I want migrate application to the cloud",repp.context,handleMigrateToCloud);
   })
 }
 
