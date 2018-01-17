@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angular/core';
 import { ConversationService }  from './conversation.service';
 import { Sentence } from "./Sentence";
 import {ActivatedRoute, Params} from '@angular/router';
@@ -10,7 +10,7 @@ import {ActivatedRoute, Params} from '@angular/router';
     templateUrl:'conversation.html'
   })
 
-export class ConversationComponent {
+export class ConversationComponent implements OnInit, AfterViewChecked {
   currentDialog : Sentence[]=[];
   context={'type':'base'}; // used to keep the Conversation context
   message:string;
@@ -24,6 +24,23 @@ export class ConversationComponent {
     // Uncomment this line if you do not have a conversation_start trigger in a node of your dialog
     this.callConversationBFF("Hello");
   }
+
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
+  ngOnInit() {
+      this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+      this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+      try {
+          this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      } catch(err) { }
+  }
+
 
   // variable used for the input field in html page to get user query
   queryString=""

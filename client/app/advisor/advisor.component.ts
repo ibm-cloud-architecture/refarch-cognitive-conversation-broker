@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angular/core';
 import { AdvisorService }  from './advisor.service';
 import { Sentence } from "../conv/Sentence";
 
@@ -9,7 +9,7 @@ import { Sentence } from "../conv/Sentence";
     templateUrl:'advisorMain.html'
   })
 
-export class AdvisorComponent {
+export class AdvisorComponent implements OnInit, AfterViewChecked{
   currentDialog : Sentence[]=[];
   context:any={};
   message:string;
@@ -19,6 +19,22 @@ export class AdvisorComponent {
   constructor(private convService : AdvisorService){
     // Uncomment this line if you do not have a conversation_start trigger in a node of your dialog
     this.callConversationBFF("Hello");
+  }
+
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
+  ngOnInit() {
+      this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+      this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+      try {
+          this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      } catch(err) { }
   }
 
   // variable used for the input field in html page to get user query
